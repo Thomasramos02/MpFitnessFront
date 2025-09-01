@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Fitness - Home</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Fontes Google: Montserrat para títulos, Inter para corpo -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Animate.css para animações de entrada -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/header.css">
+</head>
+
+<body>
+    <!-- Header Padrão para Todas as Páginas -->
+    <header class="header">
+        <div class="header-container container">
+            <a href="./index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="./img/LogoMpFitnessStore.png" alt="Logo MP Fitness" style="height: 70px;">
+                </div>
+                <div class="logo-text">MP<span>Fitness Store</span></div>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-container" id="main-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-link active"><i class="fas fa-home"></i>Início</a>
+                    <a href="./pages/acompanharPedido.html" class="nav-link"><i class="fas fa-truck"></i> Entregas</a>
+                    <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="nav-link"><i class="fas fa-envelope"></i> Contato</a>
+                    <a href="./pages/cart.html" class="nav-link cart-icon" data-count="0"><i class="fas fa-shopping-cart"></i>
+                        Carrinho</a>
+                    <a href="./pages/manage-products.html" class="nav-link"><i class="fas fa-store"></i>Produtos</a>
+                    <a href="./pages/manage_pedidos.html" class="nav-link"><i class="fas fa-clipboard-list"></i>Pedidos</a>
+                </div>
+
+                <!-- Links de Autenticação Condicionais (Visíveis por padrão, ocultos via JS se logado) -->
+                <div id="auth-links-container" class="nav-links auth-links">
+                    <a href="./pages/auth.html" id="login-link" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="./pages/auth.html?register=true" id="register-link" class="nav-link btn-primary">
+                        <i class="fas fa-user-plus"></i> Cadastro
+                    </a>
+                </div>
+
+                <!-- Menu do Usuário Logado (Oculto por padrão, visível via JS se logado) -->
+                <div id="user-menu" class="user-menu hidden">
+                    <div class="user-avatar" id="user-avatar-btn">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="./pages/profile.html" class="dropdown-link"><i class="fas fa-user"></i> Meu Perfil</a>
+                        <a href="#" id="logout-link" class="dropdown-link"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Hero -->
+    <section class="hero-banner">
+        <div class="hero-content animate__animated animate__fadeInUp">
+            <h1>Transforme Seu Corpo</h1>
+            <p>Acessorios e suplementos de alta qualidade para maximizar seus resultados</p>
+            <a href="#products" class="btn-primary">Explorar Produtos</a>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nossos Produtos</h2>
+                <div class="product-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="Equipamentos">Equipamentos</button>
+                    <button class="filter-btn" data-filter="Suplementos">Suplementos</button>
+                    <button class="filter-btn" data-filter="Acessórios">Acessórios</button>
+                    <button class="filter-btn" data-filter="Roupas">Roupas</button>
+                    <button class="filter-btn" data-filter="Calçados">Calçados</button>
+                    <button class="filter-btn" data-filter="Bebidas">Bebidas</button>
+                    <button class="filter-btn" data-filter="Snacks">Snacks</button>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Loading Skeleton -->
+                <div class="product-card-skeleton"></div>
+                <div class="product-card-skeleton"></div>
+                <div class="product-card-skeleton"></div>
+                <div class="product-card-skeleton"></div>
+            </div>
+
+            <div class="load-more-container">
+                <button id="loadMoreBtn" class="btn-secondary">Carregar Mais</button>
+            </div>
+        </div>
+    </section>
+    <!-- Sobre Nós -->
+    <section class="about-section">
+    <div class="container about-container">
+        <div class="about-content animate__animated animate__fadeInLeft">
+            <h2 class="section-title">Sobre Nós</h2>
+            <p>
+                A <strong>MP Fitness Store</strong> nasceu com a missão de oferecer os melhores
+                suplementos, calçados, roupas e acessórios de academia para todos que buscam
+                saúde, desempenho e estilo no dia a dia.  
+            </p>
+            <p>
+                Trabalhamos apenas com produtos de qualidade, entregues com rapidez e segurança
+                em qualquer lugar do Brasil. Nosso objetivo é estar ao lado de cada cliente em sua
+                jornada fitness, proporcionando confiança e resultados reais.
+            </p>
+            <p>
+                Seja você iniciante ou atleta avançado, aqui encontrará tudo o que precisa para
+                alcançar seus objetivos e elevar seu desempenho ao máximo.
+            </p>
+            <a href="#products" class="btn-primary">Conheça Nossos Produtos</a>
+        </div>
+
+        <div class="about-image animate__animated animate__fadeInRight">
+            <img src="./img/pexels-victorfreitas-841130.jpg" 
+                 alt="Equipe MP Fitness Store" 
+                 style="border-radius:16px; max-width:100%;">
+        </div>
+    </div>
+</section>
+    <!-- Destaques -->
+    <section class="features-section">
+    <div class="container features-container">
+
+        <!-- Entrega -->
+        <div class="feature-card animate__animated animate__fadeInLeft">
+            <div class="feature-icon">
+                <i class="fas fa-shipping-fast"></i>
+            </div>
+            <h3>Entrega Rápida</h3>
+            <p>Entregamos para todo o Brasil com agilidade e segurança.</p>
+        </div>
+
+        <!-- Pagamento -->
+        <div class="feature-card animate__animated animate__fadeInLeft animate__delay-0-2s">
+            <div class="feature-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3>Pagamento Seguro</h3>
+            <p>Seus dados protegidos com tecnologia de ponta.</p>
+        </div>
+
+        <!-- Parcelamento -->
+        <div class="feature-card animate__animated animate__fadeInRight animate__delay-0-2s">
+            <div class="feature-icon">
+                <i class="fas fa-credit-card"></i>
+            </div>
+            <h3>Parcele Facilmente</h3>
+            <p>Pague em até <strong>12x sem juros</strong> no cartão.</p>
+        </div>
+
+        <!-- Suporte -->
+        <div class="feature-card animate__animated animate__fadeInRight">
+            <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3>Suporte 24/7</h3>
+            <p>Atendimento rápido e especializado sempre que precisar.</p>
+        </div>
+
+        <!-- Sem Reembolso -->
+        <div class="feature-card animate__animated animate__fadeInUp animate__delay-0-3s">
+            <div class="feature-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <h3>Sem Reembolso</h3>
+            <p>Não aceitamos devoluções ou reembolsos após a compra.</p>
+        </div>
+
+    </div>
+</section>
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card animate__animated animate__fadeInUp">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Os equipamentos da MP Fitness Store transformaram minha rotina de treinos em casa. Qualidade premium!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Silva">
+                        <span>Carlos Silva</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate__animated animate__fadeInUp animate__delay-0-2s">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Suplementos com ótimo custo-benefício e entrega rápida. Recomendo a todos!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Oliveira">
+                        <span>Ana Oliveira</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card animate__animated animate__fadeInUp animate__delay-0-4s">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Atendimento excepcional e produtos de alta qualidade. Minha academia caseira ficou completa!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Ricardo Santos">
+                        <span>Ricardo Santos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+    <div class="footer-content container">
+        <!-- Logo + Descrição -->
+        <div class="footer-column">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="./img/LogoMpFitnessStore.png" alt="Logo MP Fitness" style="height: 50px;">
+                </div>
+                <div class="logo-text">MP <span>Fitness Store</span></div>
+            </a>
+            <p>
+                Sua jornada fitness começa aqui. Produtos de qualidade, suporte dedicado e entrega rápida em todo o Brasil.
+            </p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/mpfitness_store?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+
+        <!-- Produtos -->
+        <div class="footer-column">
+            <h3>Produtos</h3>
+            <ul class="footer-links">
+                <li><a href="#products" data-filter="Equipamentos">Equipamentos</a></li>
+                <li><a href="#products" data-filter="Suplementos">Suplementos</a></li>
+                <li><a href="#products" data-filter="Acessórios">Acessórios</a></li>
+                <li><a href="#products" data-filter="Roupas">Roupas</a></li>
+                <li><a href="#products" data-filter="Calçados">Calçados</a></li>
+            </ul>
+        </div>
+
+        <!-- Institucional -->
+        <div class="footer-column">
+            <h3>Institucional</h3>
+            <ul class="footer-links">
+                <li><a href="#about">Sobre Nós</a></li>
+                <li><a href="#about">Nossa História</a></li>
+                <li><a href="./pages/terms.html">Termos de Serviço</a></li>
+            </ul>
+        </div>
+
+        <!-- Atendimento -->
+        <div class="footer-column">
+            <h3>Atendimento</h3>
+            <ul class="footer-links">
+                <li><i class="fas fa-map-marker-alt"></i>Rua Alípio Bahia, 7, Bairro Chapadão - Loja 3, Pitangui/MG</li>
+                <li><i class="fas fa-phone"></i> <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato">+55 37 8849-3019</a></li>
+                <li><i class="fas fa-envelope"></i> <a href="mailto:gabrielsilvaferreira2604@gmail.com">gabrielsilvaferreira2604@gmail.com</a></li>
+                <li><i class="fas fa-clock"></i> Seg-Sex: 09h às 18h | Sáb: 09h às 12h</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Parte inferior do footer -->
+    <div class="footer-bottom">
+        <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+        </div>
+        <p>&copy; 2025 <strong>MP Fitness Store</strong>. Todos os direitos reservados. <br></p>
+    </div>
+</footer>
+
+
+    <!-- Notificação de Adição ao Carrinho (Toast) -->
+    <div id="cart-notification" class="notification"></div>
+
+    <!-- JWT Decode library for client-side token parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <!-- JavaScript Principal -->
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

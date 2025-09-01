@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Fitness - Acompanhar Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/acompanhar.css">
+</head>
+
+<body>
+    <!-- Header Padrão para Todas as Páginas - AGORA COM CLASSES BOOTSTRAP -->
+    <header class="header navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="header-container container-fluid">
+            <a href="../index.html" class="navbar-brand logo">
+                <div class="logo-icon">
+                    <img src="../img/LogoMpFitnessStore.png" alt="Logo MP Fitness" style="height: 70px;">
+                </div>
+                <div class="logo-text">MP<span>Fitness</span></div>
+            </a>
+            <!-- Botão Hambúrguer do Bootstrap -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse"
+                aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Conteúdo Colapsável do Menu -->
+            <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./acompanharPedido.html" class="nav-link"><i class="fas fa-truck"></i> Entregas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="nav-link"><i class="fas fa-envelope"></i> Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./cart.html" class="nav-link cart-icon" data-count="0"><i
+                                class="fas fa-shopping-cart"></i> Carrinho</a>
+                    </li>
+
+                    <li class="nav-item admin-only hidden">
+                        <a href="./manage-products.html" class="nav-link"><i class="fas fa-store"></i> Produtos</a>
+                    </li>
+                    <li class="nav-item admin-only hidden">
+                        <a href="./manage_pedidos.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+                    </li>
+                </ul>
+
+                <div id="user-menu" class="user-menu hidden">
+                    <div class="user-avatar" id="user-avatar-btn" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="./profile.html" class="dropdown-link"><i class="fas fa-user"></i> Meu Perfil</a>
+                        <a href="#" id="logout-link" class="dropdown-link"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="order-tracking-section">
+        <div class="container">
+            <div class="order-header">
+                <h1 class="order-title">Meus Pedidos</h1>
+                <p class="order-subtitle">Acompanhe o status de seus pedidos</p>
+            </div>
+
+            <div id="auth-error" class="error-message hidden">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Você precisa fazer login para acessar esta página.</p>
+                <a href="auth.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Fazer Login
+                </a>
+            </div>
+
+            <div id="orders-list" class="orders-container">
+                <div class="loading-message">
+                    <i class="fas fa-spinner fa-spin"></i> Carregando seus pedidos...
+                </div>
+            </div>
+
+            <div id="order-detail" class="order-detail">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <a href="index.html" class="footer-logo">
+                <div class="footer-logo-icon"><i class="fas fa-dumbbell"></i></div>
+                <div>MP Fitness</div>
+            </a>
+
+            <div class="footer-links">
+                <a href="../index.html" class="footer-link">Início</a>
+                <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="footer-link">Contatos</a>
+                <a href="./terms.html" class="footer-link">Termos</a>
+            </div>
+
+            <p class="footer-copyright">&copy; 2025 MP Fitness Store. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Inclua o JavaScript do Bootstrap AQUI, ANTES dos seus scripts customizados -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/acompanharPedidos.js"></script>
+    <script src="../js/header.js"></script>
+
+</body>
+
+</html>

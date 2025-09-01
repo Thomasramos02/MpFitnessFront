@@ -1,0 +1,492 @@
+:root {
+    --primary: #FFC107;
+    /* Amarelo vibrante */
+    --primary-dark: #FFA000;
+    --secondary: #FFFFFF;
+    --dark: #000000;
+    --gray: #757575;
+    --light-gray: #F5F5F5;
+    --lighter-gray: #FAFAFA;
+    --error: #F44336;
+    --success: #4CAF50;
+    --google: #DB4437;
+    --facebook: #4267B2;
+    --instagram: #E1306C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--lighter-gray);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.profile-container {
+    background-color: var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    overflow: hidden;
+}
+
+.profile-header {
+    background-color: var(--dark);
+    color: var(--secondary);
+    padding: 25px;
+    text-align: center;
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    background: none;
+    border: none;
+    color: var(--secondary);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.profile-header h1 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.profile-header p {
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo-text span {
+    color: var(--primary);
+}
+
+.profile-content {
+    padding: 30px;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
+    cursor: pointer;
+}
+
+.section-title i {
+    color: var(--primary);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.section-title h2 {
+    font-size: 18px;
+    color: var(--dark);
+    flex-grow: 1;
+}
+
+.section-title .toggle-arrow {
+    transition: transform 0.3s;
+}
+
+.section-title.collapsed .toggle-arrow {
+    transform: rotate(-90deg);
+}
+
+.form-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background-color: var(--lighter-gray);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+    background-color: var(--secondary);
+}
+
+.form-control:disabled {
+    background-color: #f0f0f0;
+    color: var(--gray);
+}
+
+.btn {
+    padding: 15px 25px;
+    background-color: var(--primary);
+    color: var(--dark);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--dark);
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+.btn-danger {
+    background-color: var(--error);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.profile-actions .left-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.profile-actions .right-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar i {
+    font-size: 40px;
+    color: var(--gray);
+}
+
+.change-photo {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.change-photo:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.cep-search {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    background: var(--primary);
+    color: var(--dark);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+/* Animações */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+
+/* Loading spinner */
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--dark);
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn.loading .spinner {
+    display: inline-block;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.modal-title {
+    margin-bottom: 15px;
+    color: var(--error);
+    display: flex;
+    align-items: center;
+}
+
+.modal-title i {
+    margin-right: 10px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Collapsible sections */
+.collapsible-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--dark);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast.success {
+    background-color: var(--success);
+}
+
+.toast.error {
+    background-color: var(--error);
+}
+
+.toast i {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions .left-actions,
+    .profile-actions .right-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .profile-content {
+        padding: 20px;
+    }
+
+    .profile-header {
+        padding: 20px 15px;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .profile-container {
+        margin: 15px auto;
+    }
+
+    .profile-header h1 {
+        font-size: 20px;
+    }
+
+    .section-title h2 {
+        font-size: 16px;
+    }
+
+    .form-control {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}

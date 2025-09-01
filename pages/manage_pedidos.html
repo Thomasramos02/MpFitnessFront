@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MP Fitness - Gerenciamento de Pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/manage-pedidos.css" />
+    <link rel="stylesheet" href="../css/header.css">
+</head>
+
+<body>
+    <header class="header navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="header-container container-fluid">
+            <a href="../index.html" class="navbar-brand logo">
+                <div class="logo-icon">
+                    <img src="../img/LogoMpFitnessStore.png" alt="Logo MP Fitness" style="height: 70px;">
+                </div>
+                <div class="logo-text">MP<span>Fitness</span></div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse"
+                aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./acompanharPedido.html" class="nav-link"><i class="fas fa-truck"></i> Entregas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="nav-link"><i class="fas fa-envelope"></i> Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./cart.html" class="nav-link cart-icon" data-count="0"><i
+                                class="fas fa-shopping-cart"></i> Carrinho</a>
+                    </li>
+
+                    <li class="nav-item admin-only hidden">
+                        <a href="./manage-products.html" class="nav-link"><i class="fas fa-store"></i> Produtos</a>
+                    </li>
+                    <li class="nav-item admin-only hidden">
+                        <a href="./manage_pedidos.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Pedidos</a>
+                    </li>
+                </ul>
+
+                <div id="user-menu" class="user-menu hidden">
+                    <div class="user-avatar" id="user-avatar-btn" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="./profile.html" class="dropdown-link"><i class="fas fa-user"></i> Meu Perfil</a>
+                        <a href="#" id="logout-link" class="dropdown-link"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2 admin-title">Gerenciamento de Pedidos</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button class="btn btn-sm btn-outline-secondary me-2" id="export-btn">
+                                <i class="bi bi-download me-1"></i> Exportar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card total">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Total</h6>
+                                    <h4 class="card-text" id="total-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card aguardando">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Aguardando</h6>
+                                    <h4 class="card-text" id="aguardando-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card pago">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Pagos</h6>
+                                    <h4 class="card-text" id="pago-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card separacao">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Separação</h6>
+                                    <h4 class="card-text" id="separacao-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card enviado">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Enviados</h6>
+                                    <h4 class="card-text" id="enviado-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-3">
+                            <div class="card stats-card cancelado">
+                                <div class="card-body">
+                                    <h6 class="card-title text-muted">Cancelados</h6>
+                                    <h4 class="card-text" id="cancelado-pedidos">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section mb-4">
+                        <form id="filter-form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="status-filter" class="form-label">Status</label>
+                                    <select class="form-select" id="status-filter">
+                                        <option value="">Todos</option>
+                                        <option value="AGUARDANDO_PAGAMENTO">Aguardando Pagamento</option>
+                                        <option value="PAGO">Pago</option>
+                                        <option value="EM_SEPARACAO">Em Separação</option>
+                                        <option value="ENVIADO">Enviado</option>
+                                        <option value="ENTREGUE">Entregue</option>
+                                        <option value="CANCELADO">Cancelado</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="start-date" class="form-label">Data Inicial</label>
+                                    <input type="date" class="form-control" id="start-date" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="end-date" class="form-label">Data Final</label>
+                                    <input type="date" class="form-control" id="end-date" />
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="bi bi-funnel me-1"></i> Filtrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle orders-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Endereço</th>
+                                    <th>Data Compra</th>
+                                    <th>Status</th>
+                                    <th>Valor Total</th>
+                                    <th>Forma Entrega</th>
+                                    <th>Observações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pedidos-table-body">
+                                <!-- Pedidos serão carregados aqui via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4" id="pagination">
+                            <!-- Paginação será gerada via JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="editOrderModal" tabindex="-1" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOrderModalLabel">
+                        Editar Pedido <span id="modal-order-id"></span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-order-form">
+                        <div class="mb-3">
+                            <label for="edit-status" class="form-label">Status</label>
+                            <select class="form-select" id="edit-status">
+                                <option value="AGUARDANDO_PAGAMENTO">Aguardando Pagamento</option>
+                                <option value="PAGO">Pago</option>
+                                <option value="EM_SEPARACAO">Em Separação</option>
+                                <option value="ENVIADO">Enviado</option>
+                                <option value="ENTREGUE">Entregue</option>
+                                <option value="CANCELADO">Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-previsao" class="form-label">Previsão de Entrega</label>
+                            <input type="date" class="form-control" id="edit-previsao" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-tracking" class="form-label">Código de Rastreio</label>
+                            <input type="text" class="form-control" id="edit-tracking" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-notes" class="form-label">Notas do Pedido</label>
+                            <textarea class="form-control" id="edit-notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="save-pedido-btn">
+                        Salvar Alterações
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmCancelModalLabel">
+                        Confirmar Cancelamento
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Tem certeza que deseja cancelar o pedido
+                        <span id="cancel-order-id"></span>?
+                    </p>
+                    <p class="text-danger">Esta ação não pode ser desfeita.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Não
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmActionBtn">
+                        Sim, Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/pedidos.js"></script>
+</body>
+
+</html>

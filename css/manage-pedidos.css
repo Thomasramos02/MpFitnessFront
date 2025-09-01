@@ -1,0 +1,729 @@
+/* ==========================================================================
+   MP Fitness - Dashboard de Gerenciamento de Pedidos
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Variáveis CSS (Design Tokens) - Baseadas no estilo MP Fitness
+   -------------------------------------------------------------------------- */
+:root {
+  /* Cores da Marca */
+  --mp-yellow: #FFC107;         /* Amarelo vibrante - Primária */
+  --mp-yellow-dark: #FFA000;    /* Amarelo mais escuro - Hover/Active */
+  --mp-yellow-light: #FFF8E1;   /* Amarelo muito claro - Backgrounds sutis */
+  --mp-black: #000000;          /* Preto puro - Fundo principal, texto */
+  --mp-dark-gray: #1A1A1A;      /* Cinza escuro - Sidebar, backgrounds de elementos */
+  --mp-white: #FFFFFF;          /* Branco - Texto, backgrounds */
+
+  /* Cores de Feedback */
+  --success-color: #4CAF50;     /* Verde */
+  --error-color: #F44336;       /* Vermelho */
+  --info-color: #2196F3;        /* Azul */
+  --warning-color: #FF9800;     /* Laranja */
+
+  /* Tons de Cinza Neutros */
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+
+  /* Tipografia */
+  --font-family-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-secondary: 'Inter', 'Montserrat', sans-serif;
+  --font-size-base: 0.9375rem;  /* 15px */
+  --font-size-sm: 0.8125rem;    /* 13px */
+  --font-size-md: 1rem;         /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.75rem;     /* 28px */
+  --font-size-3xl: 2.25rem;     /* 36px */
+
+  /* Espaçamentos */
+  --space-xxs: 0.25rem;         /* 4px */
+  --space-xs: 0.5rem;           /* 8px */
+  --space-sm: 0.75rem;          /* 12px */
+  --space-md: 1rem;             /* 16px */
+  --space-lg: 1.25rem;          /* 20px */
+  --space-xl: 1.75rem;          /* 28px */
+  --space-2xl: 2.5rem;          /* 40px */
+
+  /* Bordas e Arredondamentos */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-yellow-glow: 0 0 15px rgba(255, 193, 7, 0.4);
+
+  /* Transições */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset Básico e Estilos Globais
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--gray-900);
+  background-color: var(--gray-50);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  color: var(--gray-900);
+}
+
+/* Override de classes Bootstrap */
+.h2 { 
+  font-size: var(--font-size-2xl); 
+  margin-bottom: var(--space-lg); 
+}
+
+.h4 { 
+  font-size: var(--font-size-lg); 
+}
+
+.h6 { 
+  font-size: var(--font-size-base); 
+}
+
+.text-muted { 
+  color: var(--gray-500) !important; 
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout Principal
+   -------------------------------------------------------------------------- */
+.container-fluid {
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+}
+
+/* Main Content */
+.main-content {
+  background-color: var(--gray-50);
+  padding: var(--space-xl) var(--space-2xl) !important;
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+}
+
+/* Header da Seção Principal */
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom {
+  padding-top: var(--space-lg) !important;
+  padding-bottom: var(--space-md) !important;
+  margin-bottom: var(--space-xl) !important;
+  border-color: var(--gray-300) !important;
+} 
+
+/* --------------------------------------------------------------------------
+   5. Cards de Estatísticas
+   -------------------------------------------------------------------------- */
+.stats-card {
+  background-color: var(--mp-white);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  height: 100%;
+  min-height: 120px;
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.stats-card .card-body {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.stats-card .card-title {
+  font-weight: 600;
+  margin-bottom: var(--space-xxs);
+  color: var(--gray-600) !important;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stats-card .card-text {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 0;
+}
+
+/* Bordas coloridas por status */
+.stats-card.total { border-left: 4px solid var(--gray-500); }
+.stats-card.aguardando { border-left: 4px solid var(--info-color); }
+.stats-card.pago { border-left: 4px solid var(--success-color); }
+.stats-card.separacao { border-left: 4px solid var(--mp-yellow); }
+.stats-card.enviado { border-left: 4px solid var(--warning-color); }
+.stats-card.cancelado { border-left: 4px solid var(--error-color); }
+
+/* --------------------------------------------------------------------------
+   6. Seção de Filtros
+   -------------------------------------------------------------------------- */
+.filter-section {
+  background-color: var(--mp-white);
+  padding: var(--space-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.filter-section .form-label {
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.filter-section .form-control,
+.filter-section .form-select {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  height: auto;
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.filter-section .form-control:focus,
+.filter-section .form-select:focus {
+  border-color: var(--mp-yellow);
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+  background-color: var(--mp-white);
+}
+
+.filter-section .btn-primary {
+  background-color: var(--mp-yellow);
+  border-color: var(--mp-yellow);
+  color: var(--mp-black);
+  font-weight: 700;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-normal);
+  font-size: var(--font-size-base);
+}
+
+.filter-section .btn-primary:hover {
+  background-color: var(--mp-yellow-dark);
+  border-color: var(--mp-yellow-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.filter-section .btn-primary .bi {
+  font-size: var(--font-size-md);
+}
+
+/* --------------------------------------------------------------------------
+   7. Tabela de Pedidos
+   -------------------------------------------------------------------------- */
+.table-responsive {
+  margin-bottom: var(--space-xl);
+  overflow-x: auto;
+}
+
+.table {
+  background-color: var(--mp-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.table-hover tbody tr:hover {
+  background-color: var(--mp-yellow-light);
+  cursor: pointer;
+}
+
+.table-light thead {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+}
+
+.table thead th {
+  padding: var(--space-md);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.table tbody td {
+  padding: var(--space-md);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: var(--font-size-base);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: var(--space-xxs) var(--space-sm);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.status-badge.AGUARDANDO_PAGAMENTO { 
+  background-color: rgba(33, 150, 243, 0.15); 
+  color: var(--info-color); 
+}
+
+.status-badge.PAGO { 
+  background-color: rgba(76, 175, 80, 0.15); 
+  color: var(--success-color); 
+}
+
+.status-badge.EM_SEPARACAO { 
+  background-color: rgba(255, 193, 7, 0.15); 
+  color: var(--mp-yellow-dark); 
+}
+
+.status-badge.ENVIADO { 
+  background-color: rgba(255, 152, 0, 0.15); 
+  color: var(--warning-color); 
+}
+
+.status-badge.ENTREGUE { 
+  background-color: rgba(0, 150, 136, 0.15); 
+  color: #009688; 
+}
+
+.status-badge.CANCELADO { 
+  background-color: rgba(244, 67, 54, 0.15); 
+  color: var(--error-color); 
+}
+
+/* Botões de Ação */
+.table .btn-action {
+  padding: var(--space-xs) var(--space-sm);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  margin-right: var(--space-xs);
+}
+
+.table .btn-action:last-child {
+  margin-right: 0;
+}
+
+.table .btn-action.edit {
+  background-color: rgba(33, 150, 243, 0.1);
+  color: var(--info-color);
+}
+
+.table .btn-action.edit:hover {
+  background-color: var(--info-color);
+  color: var(--mp-white);
+}
+
+.table .btn-action.cancel {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--error-color);
+}
+
+.table .btn-action.cancel:hover {
+  background-color: var(--error-color);
+  color: var(--mp-white);
+}
+
+/* --------------------------------------------------------------------------
+   8. Paginação
+   -------------------------------------------------------------------------- */
+.pagination {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  display: flex;
+  justify-content: center;
+}
+
+.page-item .page-link {
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  margin: 0 var(--space-xxs);
+  transition: all var(--transition-fast);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+.page-item .page-link:hover {
+  background-color: var(--mp-yellow-light);
+  border-color: var(--mp-yellow);
+  color: var(--mp-black);
+}
+
+.page-item.active .page-link {
+  background-color: var(--mp-yellow) !important;
+  border-color: var(--mp-yellow) !important;
+  color: var(--mp-black) !important;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-item.disabled .page-link {
+  color: var(--gray-400);
+  background-color: var(--gray-100);
+  border-color: var(--gray-200);
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   9. Modais
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-dialog {
+  margin: var(--space-xl) auto;
+}
+
+.modal-content {
+  border: none;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  background-color: var(--mp-white);
+}
+
+.modal-header {
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0;
+}
+
+.modal .btn-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-lg);
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.modal .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  padding: var(--space-xl);
+}
+
+.modal-footer {
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+}
+
+/* Formulários dentro do Modal */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+}
+
+.form-group .form-control,
+.form-group .form-select,
+.form-group .form-textarea {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group .form-control:focus,
+.form-group .form-select:focus,
+.form-group .form-textarea:focus {
+  outline: none;
+  border-color: var(--mp-yellow);
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+  background-color: var(--mp-white);
+}
+
+/* Botões do Modal */
+.modal .btn-secondary {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+  border-color: var(--gray-200);
+  font-weight: 600;
+}
+
+.modal .btn-secondary:hover {
+  background-color: var(--gray-300);
+  border-color: var(--gray-300);
+}
+
+.modal .btn-primary {
+  background-color: var(--mp-yellow);
+  color: var(--mp-black);
+  border-color: var(--mp-yellow);
+  font-weight: 700;
+}
+
+.modal .btn-primary:hover {
+  background-color: var(--mp-yellow-dark);
+  border-color: var(--mp-yellow-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* --------------------------------------------------------------------------
+   10. Utilitários e Feedback
+   -------------------------------------------------------------------------- */
+/* Toast de erro */
+.error-toast {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  background-color: var(--error-color);
+  color: var(--mp-white);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all var(--transition-normal);
+  z-index: 10000;
+}
+
+.error-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.error-toast i {
+  font-size: var(--font-size-lg);
+}
+
+
+/* Loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid var(--mp-yellow);
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: var(--space-xl) auto;
+}
+
+/* --------------------------------------------------------------------------
+   11. Responsividade
+   -------------------------------------------------------------------------- */
+
+/* Telas até 991.98px (Desktops menores e Tablets Landscape) */
+@media (max-width: 991.98px) {
+  .main-content {
+    /* Ajusta o padding do conteúdo principal */
+    padding: var(--space-lg) var(--space-md) !important;
+  }
+  
+  .header-container {
+    /* Ajusta o padding do contêiner do cabeçalho */
+    padding: 0 var(--space-md);
+  }
+
+  /* Idealmente, as regras abaixo para .nav-links e .nav-link deveriam estar em header.css */
+  .nav-links {
+    /* Ajusta o espaçamento entre os links de navegação */
+    gap: var(--space-xs);
+  }
+
+  .nav-link {
+    /* Ajusta o padding e tamanho da fonte dos links de navegação */
+    padding: var(--space-xxs) var(--space-xs);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Telas até 767.98px (Tablets Portrait e Celulares Maiores) */
+@media (max-width: 767.98px) {
+  .main-content {
+    /* Reduz ainda mais o padding do conteúdo principal */
+    padding: var(--space-md) var(--space-sm) !important;
+  }
+
+  /* Transforma o layout do cabeçalho de flex para coluna, alinhando itens */
+  .d-flex.justify-content-between.flex-wrap.flex-md-nowrap {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: var(--space-md);
+  }
+
+  /* Ajustes para a barra de ferramentas de botões */
+  .btn-toolbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Margem inferior para os cards de estatísticas */
+  .stats-card {
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Margem inferior para colunas na seção de filtro */
+  .filter-section .row > [class*="col-"] {
+    margin-bottom: var(--space-md);
+  }
+
+  .filter-section .row > [class*="col-"]:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Ajustes de paginação para telas menores */
+  .pagination {
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+  }
+
+  .page-item .page-link {
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Ajustes de margem e padding para modais */
+  .modal-dialog {
+    margin: var(--space-md) auto;
+  }
+
+  .modal-content {
+    padding: var(--space-md);
+  }
+}
+
+/* Telas até 575.98px (Celulares) */
+@media (max-width: 575.98px) {
+  .main-content {
+    /* Padding mínimo para o conteúdo principal em celulares */
+    padding: var(--space-sm) var(--space-xs) !important;
+  }
+
+  /* Ajustes de fonte para títulos */
+  .h2 { 
+    font-size: var(--font-size-xl); 
+  }
+  
+  .stats-card .card-text { 
+    font-size: var(--font-size-xl); 
+  }
+  
+  /* Ajustes para botões de filtro */
+  .filter-section .btn-primary { 
+    font-size: var(--font-size-sm); 
+    padding: var(--space-sm) var(--space-md); 
+  }
+  
+  /* Ajustes de padding e fonte para a tabela */
+  .table thead th, 
+  .table tbody td { 
+    padding: var(--space-sm); 
+    font-size: var(--font-size-sm); 
+  }
+
+  .header-container {
+    /* Padding do cabeçalho para telas muito pequenas */
+    padding: 0 var(--space-sm);
+  }
+
+  .logo-text {
+    /* Ajuste do tamanho da fonte do texto do logo */
+    font-size: var(--font-size-md);
+  }
+
+  /*
+   * REMOVIDO: A regra '.nav-links { display: none; }' foi removida daqui.
+   * Essa regra estava em conflito com o JS do header e impedia o menu hambúrguer de aparecer.
+   * O controle de exibição do '.nav-links' para mobile deve ser feito no 'header.css'
+   * em conjunto com o JavaScript, alterando seu 'transform' e 'display' apropriadamente.
+   */
+
+  /* Idealmente, esta regra para o botão de menu mobile deveria estar em header.css */
+  .mobile-menu-btn {
+    display: block; /* Garante que o botão de menu mobile seja visível */
+  }
+}

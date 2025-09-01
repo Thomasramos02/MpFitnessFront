@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Fitness - Meu Perfil</title>
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <button class="back-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <div class="logo-text">MP <span>Fitness</span></div>
+            </div>
+            <h1>Meu Perfil</h1>
+            <p>Gerencie suas informações pessoais</p>
+        </div>
+
+        <div class="profile-content">
+            <!-- Seção de Foto de Perfil -->
+            <div class="profile-section">
+                <div class="profile-picture">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                        <!-- <img src="user-photo.jpg" alt="Foto do usuário"> -->
+                    </div>
+                    <span class="change-photo" id="change-photo-btn"></span>
+                    <input type="file" id="photo-upload" class="hidden" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Seção de Informações Pessoais -->
+            <div class="profile-section">
+                <div class="section-title" onclick="toggleSection('personal-info')">
+                    <i class="fas fa-user-circle"></i>
+                    <h2>Informações Pessoais</h2>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+
+                <div class="collapsible-content" id="personal-info-content">
+                    <div class="form-group">
+                        <label for="profile-name">Nome completo</label>
+                        <input type="text" id="profile-name" class="form-control"
+                            placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-email">E-mail</label>
+                        <input type="email" id="profile-email" class="form-control" placeholder="Digite seu e-mail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-phone">Telefone</label>
+                        <input type="tel" id="profile-phone" class="form-control" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Alteração de Senha - SIMPLIFICADA -->
+            <div class="profile-section">
+                <div class="section-title" onclick="toggleSection('change-password')">
+                    <i class="fas fa-lock"></i>
+                    <h2>Alterar Senha</h2>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+
+                <div class="collapsible-content" id="change-password-content">
+                    <div class="form-group">
+                        <label for="new-password">Nova Senha</label>
+                        <input type="password" id="new-password" class="form-control"
+                            placeholder="Digite a nova senha (mínimo 6 caracteres)">
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('new-password', this)"></i>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Nova Senha</label>
+                        <input type="password" id="confirm-password" class="form-control"
+                            placeholder="Confirme a nova senha">
+                        <i class="fas fa-eye password-toggle" onclick="togglePassword('confirm-password', this)"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Endereço -->
+            <div class="profile-section">
+                <div class="section-title" onclick="toggleSection('address-info')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2>Endereço</h2>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+
+                <div class="collapsible-content" id="address-info-content">
+                    <div class="form-group">
+                        <label for="profile-cep">CEP</label>
+                        <input type="text" id="profile-cep" class="form-control" placeholder="00000-000">
+                        <button type="button" class="cep-search" onclick="searchCEP()">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profile-street">Rua</label>
+                            <input type="text" id="profile-street" class="form-control" placeholder="Nome da rua">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-number">Número</label>
+                            <input type="text" id="profile-number" class="form-control" placeholder="Nº">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-complement">Complemento</label>
+                        <input type="text" id="profile-complement" class="form-control" placeholder="Apto, bloco, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-neighborhood">Bairro</label>
+                        <input type="text" id="profile-neighborhood" class="form-control" placeholder="Nome do bairro">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profile-city">Cidade</label>
+                            <input type="text" id="profile-city" class="form-control" placeholder="Cidade">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-state">Estado</label>
+                            <select id="profile-state" class="form-control">
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-country">País</label>
+                        <input type="text" id="profile-country" class="form-control" value="Brasil" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ações do Perfil -->
+            <div class="profile-actions">
+                <div class="left-actions">
+                    <button type="button" class="btn" id="save-btn" onclick="saveProfile()">
+                        <span class="spinner"></span>
+                        <span class="btn-text">Salvar Alterações</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelChanges()">Cancelar</button>
+                </div>
+                <div class="right-actions">
+                    <button type="button" class="btn btn-secondary" onclick="showDeleteModal()">
+                        <i class="fas fa-trash-alt"></i> Excluir Conta
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Confirmar Exclusão</h3>
+            </div>
+            <p>Tem certeza que deseja excluir sua conta permanentemente? Esta ação não pode ser desfeita.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="hideDeleteModal()">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="delete-btn" onclick="deleteAccount()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Excluir Conta</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>

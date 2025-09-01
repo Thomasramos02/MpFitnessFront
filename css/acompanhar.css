@@ -1,0 +1,901 @@
+/* ==========================================================================
+           MP Fitness - Variáveis e Estilos Globais
+           ========================================================================== */
+
+        :root {
+            /* Cores da Marca */
+            --primary: #000000; /* Preto principal */
+            --primary-light: #1A1A1A; /* Cinza escuro para detalhes */
+            --secondary: #FFC107; /* Amarelo MP Fitness */
+            --secondary-light: #FFA000; /* Amarelo mais escuro */
+            --light: #FFFFFF; /* Branco */
+            --dark: #121212; /* Cinza muito escuro */
+
+            /* Cores de Texto */
+            --text: #333333; /* Texto principal */
+            --text-light: #777777; /* Texto secundário */
+            --text-lighter: #AAAAAA; /* Texto mais claro/placeholder */
+
+            /* Escala de Cinzas */
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --gray-400: #BDBDBD;
+            --gray-500: #9E9E9E;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-800: #424242;
+            --gray-900: #212121;
+
+            /* Cores de Feedback (Status) */
+            --success: #4CAF50;
+            --success-light: #D4EDDA;
+            --danger: #F44336;
+            --danger-light: #F8D7DA;
+            --warning: #FF9800;
+            --warning-light: #FFF3CD;
+            --info: #2196F3;
+            --info-light: #D1ECF1;
+
+            /* Espaçamentos (rem-based) */
+            --space-xxs: 0.25rem; /* 4px */
+            --space-xs: 0.5rem;  /* 8px */
+            --space-sm: 0.75rem; /* 12px */
+            --space-md: 1rem;    /* 16px */
+            --space-lg: 1.5rem;  /* 24px */
+            --space-xl: 2rem;    /* 32px */
+            --space-2xl: 3rem;   /* 48px */
+            --space-3xl: 4rem;   /* 64px */
+
+            /* Sombras */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+            /* Bordas Arredondadas */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-radius-xl: 20px;
+            --border-radius-full: 9999px;
+
+            /* Transições */
+            --transition-fast: 0.15s ease-out;
+            --transition: 0.3s ease-out;
+
+            /* Tipografia */
+            --font-family-body: 'Inter', sans-serif;
+            --font-family-heading: 'Montserrat', sans-serif;
+            --font-size-base: 1rem; /* 16px */
+            --font-size-sm: 0.875rem; /* 14px */
+            --font-size-md: 1.125rem; /* 18px */
+            --font-size-lg: 1.25rem; /* 20px */
+            --font-size-xl: 1.5rem; /* 24px */
+            --font-size-2xl: 2rem; /* 32px */
+            --font-size-3xl: 2.5rem; /* 40px */
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: var(--font-size-base);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--gray-50); /* Fundo sutilmente cinza */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition), transform var(--transition);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+        }
+
+        h1 { font-size: var(--font-size-3xl); }
+        h2 { font-size: var(--font-size-2xl); }
+        h3 { font-size: var(--font-size-xl); }
+        h4 { font-size: var(--font-size-lg); }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg); /* Padding lateral consistente */
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        /* ==========================================================================
+           Main Content - Acompanhamento de Pedidos
+           ========================================================================== */
+        .order-tracking-section {
+            padding: var(--space-2xl) 0; /* Padding superior/inferior generoso */
+            background-color: var(--gray-50); /* Fundo claro para contraste */
+            flex: 1; /* Ocupa o espaço restante verticalmente */
+        }
+
+        /* Botão de Voltar */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin: var(--space-md) 0 var(--space-xl) 0; /* Espaçamento */
+            color: var(--text-light); /* Cor de texto secundária */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            transition: var(--transition);
+        }
+
+        .back-button i {
+            margin-right: var(--space-xs);
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            color: var(--secondary); /* Amarelo no hover */
+            transform: translateX(-3px); /* Leve movimento para a esquerda */
+        }
+
+        .back-button:hover i {
+            transform: translateX(-3px); /* Ícone se move mais */
+        }
+
+        /* Cabeçalho da Seção de Pedidos */
+        .order-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .order-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+            position: relative;
+            display: inline-block;
+            padding-bottom: var(--space-md); /* Espaço para o underline */
+        }
+
+        .order-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px; /* Largura do underline */
+            height: 4px;
+            background-color: var(--secondary); /* Amarelo MP Fitness */
+            border-radius: var(--border-radius-full);
+        }
+
+        .order-subtitle {
+            color: var(--text-light);
+            font-size: var(--font-size-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .order-number {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Mensagens de Carregamento e Erro */
+        .loading-message, .error-message {
+            background-color: var(--light);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-xl);
+            text-align: center;
+            margin: var(--space-xl) 0;
+            color: var(--text);
+            font-size: var(--font-size-md);
+        }
+
+        .loading-message i, .error-message i {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-md);
+            color: var(--secondary); /* Ícone de loading amarelo */        }
+
+        .error-message {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .error-message i {
+            color: var(--danger); /* Ícone de erro vermelho */
+        }
+
+        /* Contêiner da Lista de Pedidos */
+        .orders-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid responsivo */
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        /* Card de Pedido Individual */
+        .order-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md); /* Sombra mais visível */
+            padding: var(--space-xl);
+            transition: transform var(--transition), box-shadow var(--transition);
+            display: flex;
+            flex-direction: column;        }
+
+        .order-card:hover {
+            transform: translateY(-5px); /* Efeito de "levantar" */
+            box-shadow: var(--shadow-lg); /* Sombra mais forte no hover */
+        }
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .order-card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0;
+        }
+
+        .order-status {            display: inline-flex;
+            align-items: center;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cores dos Status */
+        .status-processing { /* Aguardando Pagamento, Pago */
+            background-color: var(--info-light);
+            color: var(--info);
+        }
+        .status-shipped { /* Em Separação, Enviado */
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+        .status-delivered { /* Entregue */
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+        .status-cancelled { /* Cancelado */
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .order-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Duas colunas para o resumo */            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+            font-size: var(--font-size-base);
+            color: var(--text-light);
+        }
+
+        .order-summary p strong {
+            color: var(--text);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+            justify-content: flex-end; /* Botões alinhados à direita */
+        }
+
+        /* ==========================================================================
+           Botões (Estilos Gerais)           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: var(--border-radius-md);
+            padding: var(--space-sm) var(--space-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: var(--space-xs);
+            font-size: var(--font-size-base);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--gray-300);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--gray-100);
+            border-color: var(--gray-400);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           Detalhes do Pedido (View Expandida)
+           ========================================================================== */
+        .order-detail {
+            background-color: var(--light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: var(--space-xl) var(--space-2xl); /* Mais padding para detalhes */
+            margin-bottom: var(--space-2xl);
+        }        .order-detail .order-card-header {
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .order-detail h2 { /* Título do pedido nos detalhes */
+            font-size: var(--font-size-xl);
+            margin-bottom: 0;
+        }
+
+        .order-detail h3 { /* Subtítulos (Produtos, Resumo) */
+            font-size: var(--font-size-lg);
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+            position: relative;
+            padding-bottom: var(--space-sm);
+        }
+        .order-detail h3::after { /* Underline para subtítulos */
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);            border-radius: var(--border-radius-full);
+        }
+
+        /* Timeline de Status */
+        .order-timeline {
+            position: relative;
+            padding-left: var(--space-xl); /* Espaço para a linha e os pontos */
+            margin: var(--space-2xl) 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: calc(var(--space-xl) / 2); /* Centraliza a linha com os pontos */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--gray-300);
+        }
+
+        .timeline-step {
+            position: relative;
+            padding-bottom: var(--space-lg); /* Espaçamento entre os passos */
+            padding-left: var(--space-lg); /* Conteúdo começa depois do ponto */
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0; /* Último passo não tem padding inferior */
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: calc(var(--space-xl) / 2 - 10px); /* Centraliza o ponto na linha */
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: var(--border-radius-full);
+            background-color: var(--gray-400); /* Cor padrão para inativo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            z-index: 1; /* Acima da linha */
+        }
+        .timeline-dot.active {
+            background-color: var(--secondary); /* Amarelo para ativo */
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: scale(1.1); /* Levemente maior quando ativo */        }
+        /* Cor específica para status Cancelado na timeline */
+        .timeline-dot.status-cancelled {
+            background-color: var(--danger);
+            color: var(--light);
+        }
+
+        .timeline-content {
+            padding-left: var(--space-md); /* Espaço do ponto */
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .timeline-text {
+            color: var(--text);
+            font-weight: 600;
+            font-size: var(--font-size-base);
+        }
+
+        /* Produtos nos Detalhes do Pedido */
+        .order-products {
+            margin-top: var(--space-xl);
+        }
+
+        .order-product {
+            display: flex;
+            gap: var(--space-lg);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--gray-200);
+            align-items: center;
+        }
+
+        .order-product:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 90px;
+            height: 90px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            flex-shrink: 0; /* Impede que a imagem encolha */
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: var(--space-xxs);
+            color: var(--primary);            font-size: var(--font-size-base);
+        }
+
+        .product-price {
+            color: var(--secondary-light);
+            font-weight: 700;
+            font-size: var(--font-size-md);
+        }
+
+        .product-details div { /* Para quantidade */
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        /* ==========================================================================
+           Footer (Rodapé)
+           ========================================================================== */
+        .footer {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: var(--space-xl) 0;
+            margin-top: auto; /* Empurra o footer para o final da página */
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 700;
+            font-size: var(--font-size-lg);
+            font-family: var(--font-family-heading);
+            margin-bottom: var(--space-sm);
+        }
+        .footer-logo-icon {
+            color: var(--secondary);
+            font-size: var(--font-size-xl);
+            margin-right: var(--space-xs);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-link {
+            color: var(--gray-400);            text-decoration: none;
+            font-size: var(--font-size-sm);
+            transition: color var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--secondary);
+        }
+
+        .footer-copyright {
+            color: var(--gray-500);
+            font-size: var(--font-size-sm);
+            text-align: center;
+        }
+
+        /* ==========================================================================
+           Responsividade
+           ========================================================================== */
+        @media (max-width: 992px) { /* Tablets e desktops menores */
+            .container {
+                padding: 0 var(--space-md);
+            }
+            h1 { font-size: var(--font-size-2xl); }
+            h2 { font-size: var(--font-size-xl); }
+            h3 { font-size: var(--font-size-lg); }
+            h4 { font-size: var(--font-size-base); }
+
+            .order-title {
+                font-size: var(--font-size-2xl);
+            }
+            .order-subtitle {
+                font-size: var(--font-size-base);
+            }
+            .order-card-title {
+                font-size: var(--font-size-base);
+            }
+            .order-status {
+                font-size: 0.8rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+            .order-summary {
+                font-size: var(--font-size-sm);
+            }
+            .btn {
+                padding: var(--space-sm) var(--space-md);
+                font-size: var(--font-size-sm);
+            }
+            .order-detail {
+                padding: var(--space-xl);
+            }
+            .order-detail h2 {
+                font-size: var(--font-size-lg);
+            }
+            .order-detail h3 {
+                font-size: var(--font-size-base);
+            }
+            .timeline-step {
+                padding-left: var(--space-md);
+            }
+            .timeline-dot {
+                left: calc(var(--space-md) / 2 - 10px);
+            }
+            .order-product {
+                gap: var(--space-md);
+            }
+            .product-image {
+                width: 80px;
+                height: 80px;
+            }
+            .product-name {
+                font-size: var(--font-size-sm);
+            }
+            .product-price {
+                font-size: var(--font-size-base);
+            }
+        }
+
+        @media (max-width: 768px) { /* Celulares maiores e tablets pequenos */
+            /* Header */
+            .header-container {
+                flex-wrap: wrap;
+                height: auto; /* Permite que a altura se ajuste ao conteúdo */
+                padding: var(--space-sm) var(--space-md);
+            }
+            .logo {
+                font-size: var(--font-size-lg);
+            }
+            .logo-icon {
+                font-size: var(--font-size-xl);
+            }
+            .nav-container {
+                width: 100%;
+                justify-content: space-between;
+                flex-direction: row-reverse; /* Botão de menu à direita */
+                margin-top: var(--space-sm);
+                /* Estilos para o menu off-canvas */
+                position: fixed;
+                top: 70px; /* Altura do header */
+                left: 0;
+                height: calc(100vh - 70px);
+                background-color: var(--primary);
+                transform: translateX(-100%); /* Esconde o menu */
+                transition: transform var(--transition);
+                overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+                padding: var(--space-lg) var(--space-md);
+                box-shadow: var(--shadow-lg);
+            }
+            .nav-container.active {
+                transform: translateX(0); /* Mostra o menu */
+            }
+            .nav-links, .auth-links {
+                display: flex; /* Sempre flex no menu mobile */
+                flex-direction: column;
+                width: 100%;
+                gap: var(--space-xs);
+            }
+            .nav-link {
+                padding: var(--space-sm) var(--space-md);
+                justify-content: center; /* Centraliza o texto e ícone */
+                width: 100%;
+            }
+            .mobile-menu-btn {
+                display: block; /* Mostra o botão de menu mobile */
+            }
+            .user-menu {
+                margin-left: 0; /* Remove margem dos links de navegação */
+            }
+            .user-menu .dropdown-menu {
+                position: static; /* Permite que o dropdown flua na coluna */
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                border-top: 1px solid var(--gray-200);
+            }
+            .user-menu .dropdown-link {
+                justify-content: center;
+                padding: var(--space-sm) var(--space-md);
+            }
+            body.no-scroll { /* Classe adicionada ao body para desabilitar scroll */
+                overflow: hidden;
+            }
+
+
+            /* Main Content */
+            .order-tracking-section {
+                padding: var(--space-xl) 0;
+            }
+            .order-header {
+                margin-bottom: var(--space-xl);
+            }
+            .order-title {
+                font-size: var(--font-size-xl);
+            }
+            .order-summary {
+                grid-template-columns: 1fr; /* Colunas empilhadas no mobile */
+            }
+            .order-actions {
+                flex-direction: column; /* Botões empilhados */
+                gap: var(--space-sm);
+            }
+            .order-detail {
+                padding: var(--space-md);
+            }
+            .order-timeline {
+                padding-left: var(--space-md);
+            }
+            .timeline-dot {
+                left: calc(var(--space-md) / 2 - 10px);
+            }            .order-product {
+                flex-direction: column; /* Imagem e detalhes do produto empilhados */
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            .product-image {
+                width: 100%;
+                height: 150px; /* Altura ajustada para imagem de largura total */
+            }
+        }
+
+        @media (max-width: 480px) { /* Celulares pequenos */
+            :root {
+                --font-size-base: 0.9375rem; /* 15px */
+                --font-size-sm: 0.8125rem; /* 13px */
+            }
+            .container {
+                padding: 0 var(--space-sm);
+            }
+            .order-tracking-section {
+                padding: var(--space-lg) 0;
+            }
+            .order-title {
+                font-size: var(--font-size-lg);
+            }
+            .order-card {
+                padding: var(--space-md);
+            }
+            .order-card-title {
+                font-size: var(--font-size-base);
+            }
+            .order-status {                font-size: 0.75rem;
+                padding: var(--space-xs) var(--space-sm);
+            }
+            .btn {
+                padding: var(--space-xs) var(--space-md);
+                font-size: var(--font-size-sm);
+            }
+            .order-detail {
+                padding: var(--space-sm);
+            }
+            .order-timeline {
+                padding-left: var(--space-sm);
+            }
+            .timeline-dot {
+                left: calc(var(--space-sm) / 2 - 10px);
+            }
+            .product-image {
+                height: 120px;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+
+
+        /* Estilo para o contêiner de detalhes do pedido */
+.order-detail {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 
+        max-height 0.5s ease-in-out,
+        opacity 0.3s ease-in-out,
+        padding 0.3s ease-in-out;
+    background-color: var(--light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-2xl);
+}
+
+.order-detail.active {
+    max-height: 2000px;
+    opacity: 1;
+    padding: var(--space-xl) var(--space-2xl);
+    margin-top: var(--space-lg);
+}
+
+/* Estilo para o card de detalhes */
+.order-detail-card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo para o botão de voltar */
+.order-detail .btn-outline {
+    margin-top: var(--space-xl);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+/* Estilo para a lista de produtos */
+.order-detail ul {
+    list-style: none;
+    margin: var(--space-md) 0;
+    padding: 0;
+}
+
+.order-detail li {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-detail li:last-child {
+    border-bottom: none;
+}
+
+/* Efeito de hover para os itens da lista */
+.order-detail li:hover {
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius-sm);
+}
+
+/* Estilo para mensagens de carregamento */
+.loading-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xl);
+    color: var(--text-light);
+}
+
+.loading-message i {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+    color: var(--secondary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Efeito de transição para a lista de pedidos */
+.orders-container {
+    transition: opacity 0.3s ease-out;
+}
+
+.orders-container.hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .order-detail.active {
+        padding: var(--space-md);
+    }
+    
+    .order-detail li {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+}

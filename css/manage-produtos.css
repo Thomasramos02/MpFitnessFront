@@ -1,0 +1,1196 @@
+/* ==========================================================================
+   MP Fitness - Gerenciamento de Produtos (Estilo Otimizado)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Variáveis CSS (Design Tokens) - Baseado no estilo original
+   -------------------------------------------------------------------------- */
+:root {
+    /* Cores da Marca */
+    --mp-yellow: #FFC107;         /* Amarelo vibrante - Primária */
+    --mp-yellow-dark: #FFA000;    /* Amarelo mais escuro - Hover/Active */
+    --mp-yellow-light: #FFF8E1;   /* Amarelo muito claro - Backgrounds sutis */
+    --mp-black: #000000;          /* Preto puro - Fundo principal, texto */
+    --mp-dark-gray: #1A1A1A;      /* Cinza escuro - Elementos, cards */
+    --mp-white: #FFFFFF;          /* Branco - Texto, backgrounds */
+
+    /* Cores de Feedback */
+    --success-color: #4CAF50;     /* Verde */
+    --error-color: #F44336;       /* Vermelho */
+    --info-color: #2196F3;        /* Azul */
+    --warning-color: #FF9800;     /* Laranja */
+
+    /* Tons de Cinza Neutros */
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #EEEEEE;
+    --gray-300: #E0E0E0;
+    --gray-400: #BDBDBD;
+    --gray-500: #9E9E9E;
+    --gray-600: #757575;
+    --gray-700: #616161;
+    --gray-800: #424242;
+    --gray-900: #212121;
+
+    /* Tipografia */
+    --font-family-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     --font-family-secondary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-size-base: 0.9375rem;  /* 15px */
+    --font-size-sm: 0.8125rem;    /* 13px */
+    --font-size-md: 1rem;         /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.75rem;     /* 28px */
+    --font-size-3xl: 2.25rem;     /* 36px */
+
+    /* Espaçamentos */
+    --space-xxs: 0.25rem;         /* 4px */
+    --space-xs: 0.5rem;           /* 8px */
+    --space-sm: 0.75rem;          /* 12px */
+    --space-md: 1rem;             /* 16px */
+    --space-lg: 1.25rem;          /* 20px */
+    --space-xl: 1.75rem;          /* 28px */
+    --space-2xl: 2.5rem;          /* 40px */
+
+    /* Bordas e Arredondamentos */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 20px;
+    --border-radius-full: 9999px;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+    --shadow-yellow-glow: 0 0 15px rgba(255, 193, 7, 0.4);
+
+    /* Transições */
+    --transition-fast: 0.15s ease-out;
+    --transition-normal: 0.3s ease-out;
+    --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+    --header-height: 70px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset Básico e Estilos Globais
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--gray-900);
+    background-color: var(--gray-50);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--mp-black);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+p { margin-bottom: var(--space-md); }
+
+
+/* Conteiner principal para centralizar conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   4. Estilos da Página de Gerenciamento de Produtos
+   -------------------------------------------------------------------------- */
+.main-content {
+    flex: 1;
+    padding: var(--space-2xl) 0;
+}
+
+.products-management {
+    background-color: var(--mp-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-xl);
+}
+
+.page-title {
+    font-size: var(--font-size-2xl);
+    color: var(--mp-black);
+    position: relative;
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-xl);
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: var(--mp-yellow);
+    border-radius: var(--border-radius-full);
+}
+
+/* Botão Adicionar Produto */
+.add-product-container {
+    margin-bottom: var(--space-xl);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-product-btn {
+    background-color: var(--mp-yellow);
+    color: var(--mp-black);
+    border: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+}
+
+.add-product-btn:hover {
+    background-color: var(--mp-yellow-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.add-product-btn i {
+    font-size: var(--font-size-md);
+}
+
+/* Tabela de Produtos */
+.table-container {
+    overflow-x: auto;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-300);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--mp-white);
+    min-width: 800px;
+}
+
+.table th {
+    background-color: var(--mp-black);
+    color: var(--mp-white);
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: middle;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background-color: var(--gray-50);
+}
+
+/* Imagem do Produto na Tabela */
+.product-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--gray-300);
+}
+
+.no-image {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+    border-radius: var(--border-radius-sm);
+    color: var(--gray-500);
+    font-size: var(--font-size-lg);
+}
+
+/* Preços */
+.original-price {
+    text-decoration: line-through;
+    color: var(--gray-500);
+    font-size: var(--font-size-sm);
+}
+
+.promotional-price {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: var(--space-xxs) var(--space-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+    color: var(--mp-white);
+}
+
+.badge-secondary {
+    background-color: var(--gray-200);
+    color: var(--gray-800);
+}
+
+/* Botões de Ação */
+.actions-cell {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.action-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-size: var(--font-size-sm);
+}
+
+.edit-btn {
+    background-color: var(--info-color);
+    color: var(--mp-white);
+}
+
+.delete-btn {
+    background-color: var(--error-color);
+    color: var(--mp-white);
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   5. Modais
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background-color: var(--mp-white);
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    transform: translateY(20px);
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--gray-300);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--mp-white);
+    z-index: 10;
+}
+
+.modal-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--mp-black);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    color: var(--gray-600);
+    transition: var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--mp-black);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: var(--space-lg);
+}
+
+/* Modal Pequeno */
+.modal-sm {
+    max-width: 500px;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--gray-700);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-sm);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    transition: var(--transition-fast);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--mp-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Linhas do Formulário */
+.form-row {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Upload de Imagem */
+.image-upload {
+    border: 2px dashed var(--gray-400);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.image-upload:hover {
+    border-color: var(--mp-yellow);
+}
+
+.image-upload-icon {
+    font-size: var(--font-size-2xl);
+    color: var(--gray-400);
+    margin-bottom: var(--space-sm);
+}
+
+.image-upload-text {
+    color: var(--gray-500);
+    margin-bottom: var(--space-xs);
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    display: none;
+    margin: 0 auto;
+    border-radius: var(--border-radius-md);
+}
+
+/* Itens de Combo */
+.combo-items-container {
+    margin-top: var(--space-md);
+}
+
+.combo-item {
+    background-color: var(--gray-50);
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-sm);
+    border: 1px solid var(--gray-300);
+}
+
+.remove-combo-item-btn {
+    background-color: var(--error-color);
+    color: var(--mp-white);
+    border: none;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxs);
+    font-size: var(--font-size-sm);
+}
+
+.remove-combo-item-btn:hover {
+    background-color: #c82333;
+}
+
+/* Ações do Formulário */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.btn {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    border: 2px solid transparent;
+}
+
+.save-btn {
+    background-color: var(--success-color);
+    color: var(--mp-white);
+}
+
+.save-btn:hover {
+    background-color: #218838;
+}
+
+.cancel-btn {
+    background-color: var(--mp-white);
+    color: var(--gray-700);
+    border-color: var(--gray-300);
+}
+
+.cancel-btn:hover {
+    background-color: var(--gray-100);
+}
+
+.btn-secondary {
+    background-color: var(--mp-white);
+    color: var(--mp-black);
+    border-color: var(--gray-300);
+}
+
+.btn-secondary:hover {
+    background-color: var(--gray-100);
+}
+
+/* --------------------------------------------------------------------------
+   6. Modal de Confirmação
+   -------------------------------------------------------------------------- */
+.confirm-message {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    font-size: var(--font-size-md);
+}
+
+.confirm-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.delete-btn {
+    background-color: var(--error-color);
+    color: var(--mp-white);
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* --------------------------------------------------------------------------
+   7. Toast Notification
+   -------------------------------------------------------------------------- */
+.toast {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    z-index: 2100;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: var(--transition-normal);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.success {
+    background-color: var(--success-color);
+    color: var(--mp-white);
+}
+
+.toast.error {
+    background-color: var(--error-color);
+    color: var(--mp-white);
+}
+
+.toast i {
+    font-size: var(--font-size-md);
+}
+
+/* --------------------------------------------------------------------------
+   8. Footer
+   -------------------------------------------------------------------------- */
+.footer {
+    background-color: var(--mp-black);
+    color: var(--mp-white);
+    padding: var(--space-xl) 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.footer-logo-icon {
+    font-size: var(--font-size-lg);
+    color: var(--mp-yellow);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-link {
+    color: var(--mp-white);
+    font-size: var(--font-size-sm);
+    transition: var(--transition-fast);
+}
+
+.footer-link:hover {
+    color: var(--mp-yellow);
+}
+
+.footer-social {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.social-link {
+    color: var(--mp-white);
+    font-size: var(--font-size-lg);
+    transition: var(--transition-fast);
+}
+
+.social-link:hover {
+    color: var(--mp-yellow);
+    transform: translateY(-2px);
+}
+
+.footer-copyright {
+    font-size: var(--font-size-sm);
+    color: var(--gray-400);
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsividade
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 var(--space-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header */
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-container.active .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: var(--mp-black);
+        padding: var(--space-md);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    /* Modal */
+    .modal {
+        width: 95%;
+    }
+    
+    /* Formulário */
+    .form-row {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-base: 0.875rem;
+        --font-size-sm: 0.75rem;
+    }
+    
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Filtros de Status */
+.filters-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.status-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.status-filter label {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-badge.ativo {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.status-badge.inativo {
+    background-color: #F44336;
+    color: white;
+}
+
+/* ✅ Estilos para badges de categoria */
+.category-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ✅ Estilos para badges de tamanho */
+.size-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
+}
+
+/* ✅ Estilos para badges de tipo */
+.type-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.type-badge.single {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.type-badge.combo {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* ✅ Estilos para badges de estoque */
+.stock-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stock-badge.in-stock {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.stock-badge.out-of-stock {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ✅ Estilos para badges de oferta */
+.offer-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.no-offer {
+    color: #6c757d;
+    font-size: 12px;
+}
+
+/* ✅ Melhorar aparência da tabela */
+.table td {
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+.product-name {
+    font-weight: 500;
+    color: #212529;
+}
+
+.product-description {
+    color: #6c757d;
+    font-size: 14px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.price {
+    font-weight: 500;
+    color: #212529;
+}
+
+.promotional-price {
+    font-size: 12px;
+    color: #dc3545;
+    text-decoration: line-through;
+}
+/*Header css*/
+/* ==========================================================================
+   HEADER MP FITNESS - ESTILO UNIFICADO (Funciona em todas as páginas)
+   ========================================================================== */
+/* ==========================================================================
+   HEADER MP FITNESS - ESTILO MODIFICADO E OTIMIZADO
+   ========================================================================== */
+
+/* 1. Variáveis específicas para o header */
+:root {
+    --header-height: 70px;
+    --header-bg: #000000;
+    --header-text: #FFFFFF;
+    --header-accent: #FFC107;
+    --header-hover-bg: rgba(255, 193, 7, 0.15);
+    --mobile-breakpoint: 991.98px;
+}
+
+/* 2. Estrutura principal do header */
+.mp-header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.mp-header-container {
+    display: flex;
+    /* Esta propriedade é a chave: ela empurra os itens filhos para as extremidades */
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 
+  MODIFICAÇÃO PRINCIPAL: 
+  Removemos 'margin-right: auto;' para permitir que o 'justify-content: space-between' 
+  do contêiner pai (.mp-header-container) funcione corretamente.
+*/
+.mp-header .logo-group {
+    display: flex;
+    align-items: center;
+    height: var(--header-height);
+    /* A linha 'margin-right: auto;' foi removida daqui. */
+}
+
+/* 3. Logo */
+.mp-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.mp-header .logo-icon img {
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.mp-header .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--header-text);
+    text-transform: uppercase;
+}
+
+.mp-header .logo-text span {
+    color: var(--header-accent);
+}
+
+/* 4. Navegação principal */
+.mp-header .nav-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.mp-header .nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.mp-header .user-menu {
+    margin-left: 1rem; /* Espaço entre último item e avatar */
+}
+
+.mp-header .nav-link {
+    color: var(--header-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mp-header .nav-link i {
+    font-size: 1rem;
+}
+
+.mp-header .nav-link:hover,
+.mp-header .nav-link.active {
+    background-color: var(--header-hover-bg);
+    color: var(--header-accent);
+}
+
+/* 5. Carrinho */
+.mp-header .cart-icon {
+    position: relative;
+}
+
+.mp-header .cart-icon::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: var(--header-accent);
+    color: #000;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+/* 6. Menu do usuário */
+.mp-header .user-menu {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.mp-header .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--header-accent);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mp-header .user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mp-header .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.mp-header .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mp-header .dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #424242;
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s ease;
+}
+
+.mp-header .dropdown-link:last-child {
+    border-bottom: none;
+}
+
+.mp-header .dropdown-link:hover {
+    background-color: #FFF8E1;
+    color: #FFA000;
+}
+
+/* 7. Menu mobile */
+.mp-header .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--header-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* 8. Links de administração */
+.mp-header .admin-only.visible {
+    display: block;
+}
+
+/* 9. Responsividade */
+@media (max-width: 991.98px) {
+    .mp-header {
+        position: fixed;
+    }
+    
+    body {
+        padding-top: var(--header-height);
+    }
+    
+    .mp-header .mobile-menu-btn {
+        display: block;
+    }
+    
+    .mp-header .nav-container {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-bg);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+    }
+    
+    .mp-header .nav-container.active {
+        transform: translateX(0);
+        
+    }
+    
+    .mp-header .nav-links {
+        flex-direction: column;
+        width: 100%;
+        
+    }
+    
+    .mp-header .nav-link {
+        width: 100%;
+        padding: 1rem;
+        justify-content: flex-start;
+        
+    }
+     .mp-header .nav-link i {
+        color: var(--mp-yellow);
+    }
+
+    
+    .mp-header .user-menu {
+        margin: 35rem 0 0;
+        width: 100%;
+    }
+    
+    .mp-header .dropdown-menu {
+        position: static;
+        width: 100%;
+        margin-top: 0.5rem;
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .mp-header .dropdown-link {
+        color: var(--header-text);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* 10. Ajustes para a página manage-products */
+.mp-header ~ .main-content {
+    margin-top: var(--header-height);
+}

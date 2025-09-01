@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Fitness - Login e Cadastro</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <button class="back-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <div class="logo-text">MP <span>Fitness</span></div>
+            </div>
+            <h1 id="form-title">Acesse sua conta</h1>
+            <p id="form-subtitle">Informe seus dados para entrar</p>
+
+            <div class="progress-steps" id="progress-steps" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="step active" id="step-1">1</div>
+                <div class="step" id="step-2">2</div>
+            </div>
+        </div>
+
+        <div class="auth-content">
+            <!-- Formulário de Login -->
+            <form class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label for="login-email" class="required-field">E-mail</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Digite seu e-mail" required>
+                    <div class="error-message" id="login-email-error">Por favor, insira um e-mail válido</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password" class="required-field">Senha</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Digite sua senha"
+                        required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('login-password', this)"></i>
+                    <div class="error-message" id="login-password-error">Por favor, insira sua senha</div>
+                </div>
+
+                <button type="button" class="btn" id="login-btn" onclick="submitLogin()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Entrar</span>
+                </button>
+
+                <div class="social-login">
+                    <p>Ou entre com</p>
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn google" onclick="loginWithGoogle()">
+                            <i class="fab fa-google"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="toggle-form">
+                    Não tem uma conta? <a onclick="showRegisterForm()">Cadastre-se</a>
+                </div>
+            </form>
+
+            <!-- Formulário de Cadastro - Passo 1 -->
+            <form class="auth-form" id="register-form-1">
+                <div class="form-group">
+                    <label for="register-name" class="required-field">Nome completo</label>
+                    <input type="text" id="register-name" class="form-control" placeholder="Digite seu nome completo"
+                        required>
+                    <div class="error-message" id="register-name-error">Por favor, insira seu nome completo</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email" class="required-field">E-mail</label>
+                    <input type="email" id="register-email" class="form-control" placeholder="Digite seu e-mail"
+                        required>
+                    <div class="error-message" id="register-email-error">Por favor, insira um e-mail válido</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-phone" class="required-field">Celular</label>
+                    <input type="tel" id="register-phone" class="form-control" placeholder="(00) 00000-0000" required>
+                    <div class="error-message" id="register-phone-error">Por favor, insira um número de celular válido
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password" class="required-field">Senha</label>
+                    <input type="password" id="register-password" class="form-control"
+                        placeholder="Crie uma senha (mínimo 6 caracteres)" required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('register-password', this)"></i>
+                    <div class="error-message" id="register-password-error">A senha deve ter pelo menos 6 caracteres
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-confirm" class="required-field">Confirmar senha</label>
+                    <input type="password" id="register-confirm" class="form-control" placeholder="Confirme sua senha"
+                        required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('register-confirm', this)"></i>
+                    <div class="error-message" id="register-confirm-error">As senhas não coincidem</div>
+                </div>
+
+                <button type="button" class="btn" onclick="validateStep1()">Continuar</button>
+
+                <div class="social-login">
+                    <p>Ou cadastre-se com</p>
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn google" onclick="loginWithGoogle()">
+                            <i class="fab fa-google"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="toggle-form">
+                    Já tem uma conta? <a onclick="showLoginForm()">Faça login</a>
+                </div>
+            </form>
+
+            <!-- Formulário de Cadastro - Passo 2 (Endereço) -->
+            <form class="auth-form" id="register-form-2">
+                <div class="address-toggle active" id="address-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Adicionar endereço (opcional)</span>
+                </div>
+
+                <div class="address-fields active" id="address-fields">
+                    <div class="form-group">
+                        <label for="register-cep">CEP</label>
+                        <input type="text" id="register-cep" class="form-control" placeholder="00000-000" maxlength="9">
+                        <button type="button" class="cep-search" onclick="searchCEP()">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-street">Rua</label>
+                            <input type="text" id="register-street" class="form-control" placeholder="Nome da rua">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-number">Número</label>
+                            <input type="text" id="register-number" class="form-control" placeholder="Nº">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-complement">Complemento</label>
+                        <input type="text" id="register-complement" class="form-control"
+                            placeholder="Apto, bloco, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-neighborhood">Bairro</label>
+                        <input type="text" id="register-neighborhood" class="form-control" placeholder="Nome do bairro">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-city">Cidade</label>
+                            <input type="text" id="register-city" class="form-control" placeholder="Cidade">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-state">Estado</label>
+                            <select id="register-state" class="form-control">
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button type="button" class="btn" id="register-btn" onclick="submitForm()">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Finalizar Cadastro</span>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="backToStep1()">Voltar</button>
+            </form>
+        </div>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/auth.js"></script>
+</body>
+
+</html>
