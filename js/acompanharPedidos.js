@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ordersList.innerHTML = `
                 <div class="order-card">
                     <p>Você ainda não fez nenhum pedido.</p>
-                    <a href="index.html" class="btn btn-primary">
+                    <a href="../index.html" class="btn btn-primary">
                         <i class="fas fa-shopping-cart"></i> Ir para a loja
                     </a>
                 </div>`;
