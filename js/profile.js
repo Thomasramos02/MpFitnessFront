@@ -163,7 +163,7 @@ async function loadUserData() {
             return;
         }
 
-        const response = await fetch('http://localhost:8080/api/clientes/me', {
+        const response = await fetch('https://mpfitnessback.onrender.com/api/clientes/me', {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -251,7 +251,7 @@ async function saveProfile() {
         };
 
         // Atualizar perfil
-        const updateResponse = await fetch('http://localhost:8080/api/clientes/atualizar', {
+        const updateResponse = await fetch('https://mpfitnessback.onrender.com/api/clientes/atualizar', {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -270,7 +270,7 @@ async function saveProfile() {
 
         // Atualizar senha (se necessário)
         if (newPassword) {
-            const passwordResponse = await fetch('http://localhost:8080/api/clientes/atualizar-senha', {
+            const passwordResponse = await fetch('https://mpfitnessback.onrender.com/api/clientes/atualizar-senha', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -313,7 +313,7 @@ async function deleteAccount() {
             return;
         }
 
-        const response = await fetch('http://localhost:8080/api/clientes/remover', {
+        const response = await fetch('https://mpfitnessback.onrender.com/api/clientes/remover', {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

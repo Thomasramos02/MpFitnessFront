@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ordersList.classList.remove('hidden');
 
             const user = decodeToken(jwtToken);
-            const response = await fetch(`http://localhost:8080/api/pedidos/clientes/${user.id}/pedidos`, {
+            const response = await fetch(`https://mpfitnessback.onrender.com/api/pedidos/clientes/${user.id}/pedidos`, {
                 headers: { 'Authorization': `Bearer ${jwtToken}` }
             });
             if (!response.ok) throw await response.json();
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             orderDetail.classList.remove('active');
 
-            const response = await fetch(`http://localhost:8080/api/pedidos/${pedidoId}`, {
+            const response = await fetch(`https://mpfitnessback.onrender.com/api/pedidos/${pedidoId}`, {
                 headers: { 'Authorization': `Bearer ${jwtToken}` }
             });
             if (!response.ok) throw await response.json();

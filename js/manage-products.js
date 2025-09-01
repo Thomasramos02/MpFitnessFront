@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const API_BASE_URL = 'http://localhost:8080/api/produtos';
-    const IMAGE_BASE_URL = 'http://localhost:8080';
+    const API_BASE_URL = 'https://mpfitnessback.onrender.com/api/produtos';
+    const IMAGE_BASE_URL = 'https://mpfitnessback.onrender.com';
     const PLACEHOLDER_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZjVmNWY1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlNlbTwvdGV4dD48L3N2Zz4=';
 
     const addProductBtn = document.getElementById('addProductBtn');

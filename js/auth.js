@@ -296,7 +296,7 @@ async function submitLogin() {
     showLoading('login-btn');
 
     try {
-        const response = await fetch('http://localhost:8080/api/auth/login', {
+        const response = await fetch('https://mpfitnessback.onrender.com/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -365,7 +365,7 @@ async function submitForm() {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/api/auth/register', {
+        const response = await fetch('https://mpfitnessback.onrender.com/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -398,7 +398,7 @@ async function submitForm() {
 
 // Funções para login Google
 function loginWithGoogle() {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = "https://mpfitnessback.onrender.com/oauth2/authorization/google";
 }
 
 // Esqueci minha senha
@@ -442,7 +442,7 @@ async function submitForgotPassword() {
     showLoading('forgot-btn'); // Supondo que o botão tenha o id 'forgot-btn'
 
     try {
-        const response = await fetch('http://localhost:8080/api/auth/forgot-password', {
+        const response = await fetch('https://mpfitnessback.onrender.com/api/auth/forgot-password', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadCartItems() {
         try {
             const jwtToken = localStorage.getItem('jwtToken');
-            const response = await fetch(`http://localhost:8080/clientes/${clienteId}/carrinho`, {
+            const response = await fetch(`https://mpfitnessback.onrender.com/clientes/${clienteId}/carrinho`, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`
                 }
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadSavedAddress() {
         try {
             const jwtToken = localStorage.getItem('jwtToken');
-            const response = await fetch('http://localhost:8080/api/clientes/endereco', {
+            const response = await fetch('https://mpfitnessback.onrender.com/api/clientes/endereco', {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`
                 }
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const jwtToken = localStorage.getItem('jwtToken');
             const response = await fetch(
-                `http://localhost:8080/clientes/${clienteId}/carrinho/remover/${productId}`,
+                `https://mpfitnessback.onrender.com/clientes/${clienteId}/carrinho/remover/${productId}`,
                 {
                     method: 'DELETE',
                     headers: {
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Primeiro verifica o estoque disponível
-            const stockResponse = await fetch(`http://localhost:8080/api/produtos/${productId}/estoque`);
+            const stockResponse = await fetch(`https://mpfitnessback.onrender.com/api/produtos/${productId}/estoque`);
             if (!stockResponse.ok) {
                 throw new Error('Erro ao verificar estoque');
             }
@@ -344,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const jwtToken = localStorage.getItem('jwtToken');
             const response = await fetch(
-                `http://localhost:8080/clientes/${clienteId}/carrinho/atualizar/${productId}?quantidade=${newQuantity}`,
+                `https://mpfitnessback.onrender.com/clientes/${clienteId}/carrinho/atualizar/${productId}?quantidade=${newQuantity}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 quantidade: Number(item.quantidade)
             }));
 
-            const response = await fetch(`http://localhost:8080/api/payments/create-preference/${pedidoId}`, {
+            const response = await fetch(`https://mpfitnessback.onrender.com/api/payments/create-preference/${pedidoId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,
@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!clienteId) return;
         try {
             const jwtToken = localStorage.getItem('jwtToken');
-            const response = await fetch(`http://localhost:8080/api/clientes/telefone`, {
+            const response = await fetch(`https://mpfitnessback.onrender.com/api/clientes/telefone`, {
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`
                 }
@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const jwtToken = localStorage.getItem('jwtToken');
 
-            const pedidoResponse = await fetch(`http://localhost:8080/api/pedidos/finalizar/${clienteId}?formaEntrega=${formaEntrega}`, {
+            const pedidoResponse = await fetch(`https://mpfitnessback.onrender.com/api/pedidos/finalizar/${clienteId}?formaEntrega=${formaEntrega}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`,

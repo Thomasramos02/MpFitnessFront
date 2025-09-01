@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const PRODUCTS_PER_LOAD = 8;
     let currentFilter = 'all';
 
-    const IMAGE_BASE_URL = 'http://localhost:8080';
+    const IMAGE_BASE_URL = 'https://mpfitnessback.onrender.com';
     const PLACEHOLDER_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y1ZjVmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5TZW0gSW1hZ2VtPC90ZXh0Pjwvc3ZnPg==';
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adicionando...';
         button.disabled = true;
 
-        fetch(`http://localhost:8080/clientes/${clienteId}/carrinho/adicionar/${produtoId}`, {
+        fetch(`https://mpfitnessback.onrender.com/clientes/${clienteId}/carrinho/adicionar/${produtoId}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showLoadingSkeleton(PRODUCTS_PER_LOAD);
         checkAuthAndHeader();
 
-        fetch("http://localhost:8080/api/produtos/ativos")
+        fetch("https://mpfitnessback.onrender.com/api/produtos/ativos")
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP ${res.status}`);

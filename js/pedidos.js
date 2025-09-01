@@ -8,7 +8,7 @@ class PedidosManager {
     this.allPedidos = [];
     this.filteredPedidos = [];
     this.currentPedidoId = null;
-    this.BASE_URL = 'http://localhost:8080';
+    this.BASE_URL = 'https://mpfitnessback.onrender.com';
 
     // Verifica autenticação antes de inicializar
     this.initElements();
