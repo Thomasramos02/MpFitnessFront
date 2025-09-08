@@ -1283,9 +1283,9 @@ p { margin-bottom: var(--space-md); }
         flex-direction: column;
         margin-top: 0;
         position: fixed;
-        top: 70px;
+        top: 0px;
         left: 0;
-        height: calc(100vh - 70px);
+        height: 100vh;
         background-color: var(--mp-black);
         transform: translateX(-100%);
         transition: transform var(--transition-normal) ease-in-out;
