@@ -325,9 +325,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const enhancedProducts = produtosEmEstoque.map(p => ({
                     ...p,
                     categoria: p.categoria || 'Geral',
-                    novo: Math.random() < 0.3,
-                    emOferta: Math.random() < 0.5,
-                    valorPromocional: p.valor * (0.7 + Math.random() * 0.2),
+                    descricao: p.descricao || '',
+                    img: p.img || PLACEHOLDER_IMAGE,
+                    emOferta: p.emOferta || false,
+                    valorPromocional: p.valorPromocional || null,
                     avaliacao: Math.floor(Math.random() * 2) + 4,
                     avaliacoes: Math.floor(Math.random() * 50) + 5,
                 }));

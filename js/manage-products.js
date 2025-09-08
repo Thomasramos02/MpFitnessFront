@@ -414,7 +414,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // Upload de imagem
    // Upload de imagem
     function handleImageUpload(e) {
         const file = e.target.files[0];
@@ -663,7 +662,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Upload de imagem do produto
-    // Upload de imagem do produto - CORRIGIDO com melhor tratamento de erro
     async function uploadProductImage(productId, imageFile) {
         const formData = new FormData();
         formData.append('file', imageFile);

@@ -115,8 +115,14 @@ class PedidosManager {
   applyFilters() {
     const status = this.elements.statusFilter?.value || '';
     const start = this.elements.startDate?.value ? new Date(this.elements.startDate.value) : null;
-    const end = this.elements.endDate?.value ? new Date(this.elements.endDate.value) : null;
-
+    const end = this.elements.endDate?.value
+    ? (() => {
+        const d = new Date(this.elements.endDate.value);
+        d.setHours(23, 59, 59, 999); // inclui o dia todo
+        return d;
+      })()
+    : null;
+    
     this.filteredPedidos = this.allPedidos.filter((pedido) => {
       const pedidoDate = new Date(pedido.dataCompra);
       const isWithinRange = (!start || pedidoDate >= start) && (!end || pedidoDate <= end);
