@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function renderProducts(productsToDisplay, append = false) {
+   function renderProducts(productsToDisplay, append = false) {
         if (!append) productsGrid.innerHTML = '';
         if (productsToDisplay.length === 0 && !append) {
             productsGrid.innerHTML = `
@@ -117,32 +117,52 @@ document.addEventListener("DOMContentLoaded", () => {
             loadMoreBtn.style.display = 'none';
             return;
         }
+
         productsToDisplay.forEach(produto => {
             const productCard = document.createElement("div");
             productCard.className = "product-card animate__animated animate__fadeInUp";
-            const precoExibido = produto.emOferta && produto.valorPromocional ? produto.valorPromocional : produto.valor;
-            let imageUrl = produto.img && produto.img.startsWith('http') ? produto.img : (produto.img ? `${IMAGE_BASE_URL}/${produto.img}` : PLACEHOLDER_IMAGE);
+
+            const precoExibido = produto.emOferta && produto.valorPromocional
+                ? produto.valorPromocional
+                : produto.valor;
+
+            let imageUrl = produto.img && produto.img.startsWith('http')
+                ? produto.img
+                : (produto.img ? `${IMAGE_BASE_URL}/${produto.img}` : PLACEHOLDER_IMAGE);
 
             productCard.innerHTML = `
                 <div class="product-image-container">
                     <img src="${imageUrl}" alt="${produto.nome}" class="product-image" onerror="this.src='${PLACEHOLDER_IMAGE}'">
                     ${produto.emOferta ? '<span class="product-badge sale">Oferta</span>' : ''}
+                    ${produto.tipoProduto === "COMBO" ? '<span class="product-badge combo">Combo</span>' : ''}
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">${produto.nome}</h3>
                     ${produto.descricao ? `<p class="product-description">${produto.descricao}</p>` : ''}
+
+                    <div class="product-meta">
+                        ${produto.categoria ? `<span class="product-category"><i class="fas fa-tag"></i> ${produto.categoria}</span>` : ''}
+                        ${produto.tamanho ? `<span class="product-size"><i class="fas fa-ruler-combined"></i> ${produto.tamanho}</span>` : ''}
+                    </div>
+
                     <div class="product-price-container">
-                        ${produto.emOferta && produto.valorPromocional ? `<span class="product-original-price">R$ ${produto.valor.toFixed(2).replace('.', ',')}</span>` : ''}
+                        ${produto.emOferta && produto.valorPromocional
+                            ? `<span class="product-original-price">R$ ${produto.valor.toFixed(2).replace('.', ',')}</span>`
+                            : ''}
                         <span class="product-price">R$ ${precoExibido.toFixed(2).replace('.', ',')}</span>
                     </div>
+
                     <button class="add-to-cart-btn" data-id="${produto.id}">
                         <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
                     </button>
                 </div>`;
+
             productsGrid.appendChild(productCard);
         });
+
         attachProductButtonListeners();
     }
+
 
     function attachProductButtonListeners() {
         productsGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
