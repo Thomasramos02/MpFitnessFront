@@ -121,11 +121,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const productCard = document.createElement("div");
             productCard.className = "product-card animate__animated animate__fadeInUp";
             const precoExibido = produto.emOferta && produto.valorPromocional ? produto.valorPromocional : produto.valor;
-            let imageUrl = produto.img && produto.img.startsWith('http') ? produto.img : (produto.img ? `${IMAGE_BASE_URL}/${produto.img}` : PLACEHOLDER_IMAGE);
+
+            // ✅ Definir imageUrls para cada produto
+            let carouselId = `carousel-${produto.id}`; // id único para cada produto
+            let imageUrls = (produto.imagens && produto.imagens.length > 0)
+                ? produto.imagens
+                : [PLACEHOLDER_IMAGE];
+
+            // Cria o HTML do carousel
+            let imagesHtml = `
+                <div class="product-carousel" id="${carouselId}">
+                    ${imageUrls.map((url, index) => {
+                        let finalUrl = url.startsWith('http') ? url : `${IMAGE_BASE_URL}/${url}`;
+                        return `<img src="${finalUrl}" alt="${produto.nome}" class="carousel-image${index === 0 ? ' active' : ''}" onerror="this.src='${PLACEHOLDER_IMAGE}'">`;
+                    }).join('')}
+                    ${imageUrls.length > 1 ? `
+                    <button class="carousel-prev">&lt;</button>
+                    <button class="carousel-next">&gt;</button>` : ''}
+                </div>
+            `;
 
             productCard.innerHTML = `
                 <div class="product-image-container">
-                    <img src="${imageUrl}" alt="${produto.nome}" class="product-image" onerror="this.src='${PLACEHOLDER_IMAGE}'">
+                    ${imagesHtml}
                     ${produto.emOferta ? '<span class="product-badge sale">Oferta</span>' : ''}
                 </div>
                 <div class="product-info">
@@ -138,11 +156,38 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button class="add-to-cart-btn" data-id="${produto.id}">
                         <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
                     </button>
-                </div>`;
-            productsGrid.appendChild(productCard);
-        });
-        attachProductButtonListeners();
+                </div>
+            `;
+
+        productsGrid.appendChild(productCard);
+    });
+
+    attachProductButtonListeners();
+
     }
+            // Inicializa carousels após renderizar os produtos
+        document.querySelectorAll('.product-carousel').forEach(carousel => {
+            const images = carousel.querySelectorAll('img');
+            let currentIndex = 0;
+
+            const showImage = index => {
+                images.forEach((img, i) => img.classList.toggle('active', i === index));
+            };
+
+            const prevBtn = carousel.querySelector('.carousel-prev');
+            const nextBtn = carousel.querySelector('.carousel-next');
+
+            if (prevBtn) prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            });
+
+            if (nextBtn) nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            });
+        });
+
 
     function attachProductButtonListeners() {
         productsGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {

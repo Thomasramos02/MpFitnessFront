@@ -207,9 +207,13 @@
                             <i class="fas fa-cloud-upload-alt image-upload-icon"></i>
                             <p class="image-upload-text">Arraste e solte uma imagem ou clique para selecionar</p>
                             <img id="imagePreview" class="image-preview" style="display: none;">
-                            <input type="file" id="productImage" accept="image/*" style="display: none;">
+                            <input type="file" id="productImage" accept="image/*"  multiple style="display: none;">
                         </div>
                     </div>
+
+                     
+                        <!-- Container para múltiplos previews -->
+                    <div id="imagePreviewContainer" class="image-preview-container"></div>
 
                     <div class="form-actions">
                         <button type="button" id="saveProductBtn" class="btn save-btn">
