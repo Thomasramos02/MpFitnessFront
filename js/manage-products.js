@@ -416,33 +416,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
    // Upload de imagem
     function handleImageUpload(e) {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
+        const file = e.target.files[0];
+        if (!file) return;
 
-        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-        if (!imagePreviewContainer) return;
-
-        imagePreviewContainer.innerHTML = ''; // limpa previews anteriores
-
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-
-            // Valida tamanho e tipo (opcional, você já tem isso)
-            const MAX_FILE_SIZE = 5 * 1024 * 1024;
-            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-            if (file.size > MAX_FILE_SIZE || !validImageTypes.includes(file.type)) continue;
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.classList.add('image-preview');
-                imagePreviewContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file);
+        // Verifica o tamanho do arquivo (máximo 5MB)
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+        if (file.size > MAX_FILE_SIZE) {
+            showToast('A imagem deve ter no máximo 5MB', 'error');
+            e.target.value = ''; // Limpa o input
+            return;
         }
-    }
 
+        // Verifica o tipo do arquivo
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validImageTypes.includes(file.type)) {
+            showToast('Por favor, selecione uma imagem JPEG, PNG, GIF ou WebP', 'error');
+            e.target.value = ''; // Limpa o input
+            return;
+        }
+
+        const reader = new FileReader();
+        const imagePreview = document.getElementById('imagePreview');
+        if (!imagePreview) return;
+
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    }
 
     // Toggle campo de preço promocional
     function togglePromotionalPriceField() {
@@ -563,13 +566,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const savedProduct = await response.json();
 
             // Upload de imagem se houver
-            const imageFiles = document.getElementById('productImage')?.files;
-                if (imageFiles && imageFiles.length > 0) {
-                    for (let i = 0; i < imageFiles.length; i++) {
-                        await uploadProductImage(savedProduct.id, imageFiles[i]);
-                    }
+            const imageFile = document.getElementById('productImage')?.files[0];
+            if (imageFile) {
+                try {
+                    await uploadProductImage(savedProduct.id, imageFile);
+                } catch (uploadError) {
+                    console.warn('Erro no upload da imagem, mas produto foi salvo:', uploadError);
+                    showToast('Produto salvo, mas houve um erro ao enviar a imagem', 'warning');
                 }
-
+            }
 
             showToast('Produto salvo com sucesso!', 'success');
             closeProductModal();

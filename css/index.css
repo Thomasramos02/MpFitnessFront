@@ -540,44 +540,6 @@ p { margin-bottom: var(--space-md); }
     margin: var(--space-xs) auto 0;
     border-radius: var(--border-radius-full);
 }
-.product-carousel {
-    position: relative;
-    width: 100%;
-    height: 200px; /* ajuste conforme desejar */
-    overflow: hidden;
-}
-
-.product-carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
-    transition: opacity 0.3s ease;
-}
-
-.product-carousel img.active {
-    display: block;
-}
-
-.product-carousel button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.product-carousel .carousel-prev {
-    left: 5px;
-}
-
-.product-carousel .carousel-next {
-    right: 5px;
-}
 
 /* ✅ Melhorar estilos dos filtros */
 .product-filters {
@@ -1515,44 +1477,6 @@ p { margin-bottom: var(--space-md); }
     .product-card-skeleton {
         height: 420px; /* Ajusta a altura para o novo card */
     }
-    .product-carousel {
-    position: relative;
-    width: 100%;
-    height: 200px; /* ajuste conforme desejar */
-    overflow: hidden;
-}
-
-.product-carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
-    transition: opacity 0.3s ease;
-}
-
-.product-carousel img.active {
-    display: block;
-}
-
-.product-carousel button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.product-carousel .carousel-prev {
-    left: 5px;
-}
-
-.product-carousel .carousel-next {
-    right: 5px;
-}
 
     /* Testimonials */
     .testimonial-card p {
@@ -1612,45 +1536,6 @@ p { margin-bottom: var(--space-md); }
     .product-price {
         font-size: var(--font-size-lg);
     }
-    .product-carousel {
-    position: relative;
-    width: 100%;
-    height: 200px; /* ajuste conforme desejar */
-    overflow: hidden;
-}
-
-.product-carousel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
-    transition: opacity 0.3s ease;
-}
-
-.product-carousel img.active {
-    display: block;
-}
-
-.product-carousel button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.product-carousel .carousel-prev {
-    left: 5px;
-}
-
-.product-carousel .carousel-next {
-    right: 5px;
-}
-
 }
 
 /* --------------------------------------------------------------------------
