@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Fitness - Gerenciamento de Produtos</title>
+    <title>Cranio Fix - Gerenciamento de Produtos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -19,9 +19,9 @@
         <div class="mp-header-container">
             <a href="../index.html" class="logo">
                 <div class="logo-icon">
-                    <img src="../img/LogoMpFitnessStore.png" alt="Logo MP Fitness" style="height: 70px;">
+                    <img src="../img/CranioLogo.png" alt="Logo MP Fitness" style="height: 60px;">
                 </div>
-                <div class="logo-text">MP<span>Fitness</span></div>
+                <div class="logo-text">Cranio<span>Fix</span></div>
             </a>
 
             <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
@@ -86,7 +86,6 @@
                             <th>Descrição</th>
                             <th>Preço</th>
                             <th>Estoque</th>
-                            <th>Tamanho</th>
                             <th>Tipo</th>
                             <th>Oferta</th>
                             <th>Status</th>
@@ -128,14 +127,10 @@
                         <label for="productCategory">Categoria*</label>
                         <select id="productCategory" class="form-control" name="productCategory" required>
                             <option value="">Selecione uma categoria</option>
-                            <option value="Equipamentos">Equipamentos</option>
-                            <option value="Suplementos">Suplementos</option>
-                            <option value="Acessórios">Acessórios</option>
-                            <option value="Roupas">Roupas</option>
-                            <option value="Calçados">Calçados</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Snacks">Snacks</option>
+                            <option value="Biomateriais">Bio-Materiais</option>
+                            <option value="OPRE">OPRE</option>
                             <option value="Geral">Geral</option>
+                            <option value="Outros">Outros</option>
                         </select>
                     </div>
 
@@ -154,11 +149,6 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="productSize">Tamanho/Quantidade</label>
-                            <input type="text" id="productSize" class="form-control" name="productSize" maxlength="50"
-                                placeholder="Ex: 500g, 1kg, 30 cápsulas, Nº 42, M, etc.">
-                        </div>
 
                         <div class="form-group">
                             <label for="productType">Tipo do Produto*</label>
@@ -274,13 +264,13 @@
     <footer class="footer">
         <div class="container footer-container">
             <a href="../index.html" class="footer-logo">
-                <div class="footer-logo-icon"><i class="fas fa-dumbbell"></i></div>
-                <div>MP Fitness Store</div>
+                <div class="footer-logo-icon"><i class="fas fa-stethoscope"></i></div>
+                <div>Cranio Fix</div>
             </a>
 
             <div class="footer-links">
                 <a href="../index.html" class="footer-link">Início</a>
-                <a href="https://wa.me/553788493019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="footer-link">Contato</a>
+                <a href="https://wa.me/5537884019?text=Ol%C3%A1,%20quero%20entrar%20em%20contato" class="footer-link">Contato</a>
                 <a href="./terms.html" class="footer-link">Termos</a>
             </div>
 
@@ -291,7 +281,7 @@
                 <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
             </div>
 
-            <p class="footer-copyright">&copy; 2025 MP Fitness Store. Todos os direitos reservados.</p>
+            <p class="footer-copyright">&copy; 2025 Cranio Fix. Todos os direitos reservados.</p>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>

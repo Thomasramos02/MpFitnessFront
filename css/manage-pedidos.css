@@ -3,13 +3,13 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Variáveis CSS (Design Tokens) - Baseadas no estilo MP Fitness
+   1. Variáveis CSS (Design Tokens) - Atualizado para AZUL
    -------------------------------------------------------------------------- */
 :root {
-  /* Cores da Marca */
-  --mp-yellow: #FFC107;         /* Amarelo vibrante - Primária */
-  --mp-yellow-dark: #FFA000;    /* Amarelo mais escuro - Hover/Active */
-  --mp-yellow-light: #FFF8E1;   /* Amarelo muito claro - Backgrounds sutis */
+  /* Cores da Marca - AZUL */
+  --mp-blue: #2196F3;           /* Azul vibrante - Primária */
+  --mp-blue-dark: #1976D2;      /* Azul mais escuro - Hover/Active */
+  --mp-blue-light: #E3F2FD;     /* Azul muito claro - Backgrounds sutis */
   --mp-black: #000000;          /* Preto puro - Fundo principal, texto */
   --mp-dark-gray: #1A1A1A;      /* Cinza escuro - Sidebar, backgrounds de elementos */
   --mp-white: #FFFFFF;          /* Branco - Texto, backgrounds */
@@ -63,7 +63,7 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --shadow-yellow-glow: 0 0 15px rgba(255, 193, 7, 0.4);
+  --shadow-blue-glow: 0 0 15px rgba(33, 150, 243, 0.4);
 
   /* Transições */
   --transition-fast: 0.15s ease-out;
@@ -199,7 +199,7 @@ h1, h2, h3, h4, h5, h6 {
 .stats-card.total { border-left: 4px solid var(--gray-500); }
 .stats-card.aguardando { border-left: 4px solid var(--info-color); }
 .stats-card.pago { border-left: 4px solid var(--success-color); }
-.stats-card.separacao { border-left: 4px solid var(--mp-yellow); }
+.stats-card.separacao { border-left: 4px solid var(--mp-blue); }
 .stats-card.enviado { border-left: 4px solid var(--warning-color); }
 .stats-card.cancelado { border-left: 4px solid var(--error-color); }
 
@@ -235,15 +235,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .filter-section .form-control:focus,
 .filter-section .form-select:focus {
-  border-color: var(--mp-yellow);
-  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+  border-color: var(--mp-blue);
+  box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
   background-color: var(--mp-white);
 }
 
 .filter-section .btn-primary {
-  background-color: var(--mp-yellow);
-  border-color: var(--mp-yellow);
-  color: var(--mp-black);
+  background-color: var(--mp-blue);
+  border-color: var(--mp-blue);
+  color: var(--mp-white);
   font-weight: 700;
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--border-radius-md);
@@ -252,8 +252,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .filter-section .btn-primary:hover {
-  background-color: var(--mp-yellow-dark);
-  border-color: var(--mp-yellow-dark);
+  background-color: var(--mp-blue-dark);
+  border-color: var(--mp-blue-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -279,7 +279,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .table-hover tbody tr:hover {
-  background-color: var(--mp-yellow-light);
+  background-color: var(--mp-blue-light);
   cursor: pointer;
 }
 
@@ -330,8 +330,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .status-badge.EM_SEPARACAO { 
-  background-color: rgba(255, 193, 7, 0.15); 
-  color: var(--mp-yellow-dark); 
+  background-color: rgba(33, 150, 243, 0.15); 
+  color: var(--mp-blue-dark); 
 }
 
 .status-badge.ENVIADO { 
@@ -409,15 +409,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-item .page-link:hover {
-  background-color: var(--mp-yellow-light);
-  border-color: var(--mp-yellow);
+  background-color: var(--mp-blue-light);
+  border-color: var(--mp-blue);
   color: var(--mp-black);
 }
 
 .page-item.active .page-link {
-  background-color: var(--mp-yellow) !important;
-  border-color: var(--mp-yellow) !important;
-  color: var(--mp-black) !important;
+  background-color: var(--mp-blue) !important;
+  border-color: var(--mp-blue) !important;
+  color: var(--mp-white) !important;
   font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
@@ -513,8 +513,8 @@ h1, h2, h3, h4, h5, h6 {
 .form-group .form-select:focus,
 .form-group .form-textarea:focus {
   outline: none;
-  border-color: var(--mp-yellow);
-  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+  border-color: var(--mp-blue);
+  box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
   background-color: var(--mp-white);
 }
 
@@ -532,15 +532,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal .btn-primary {
-  background-color: var(--mp-yellow);
-  color: var(--mp-black);
-  border-color: var(--mp-yellow);
+  background-color: var(--mp-blue);
+  color: var(--mp-white);
+  border-color: var(--mp-blue);
   font-weight: 700;
 }
 
 .modal .btn-primary:hover {
-  background-color: var(--mp-yellow-dark);
-  border-color: var(--mp-yellow-dark);
+  background-color: var(--mp-blue-dark);
+  border-color: var(--mp-blue-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -586,7 +586,7 @@ h1, h2, h3, h4, h5, h6 {
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  border-top: 4px solid var(--mp-yellow);
+  border-top: 4px solid var(--mp-blue);
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;

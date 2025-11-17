@@ -7,7 +7,7 @@
     --footer-bg: #000000;
     --footer-text: #FFFFFF;
     --footer-link: #BDBDBD;
-    --footer-accent: #FFC107;
+    --footer-accent: #2196F3; /* Amarelo → Azul */
 }
 
 /* Estrutura Base */
@@ -48,7 +48,7 @@
 
 .footer-logo-icon {
     font-size: 1.5rem;
-    color: var(--footer-accent);
+    color: var(--footer-accent); /* Azul */
 }
 
 .footer-slogan {
@@ -76,7 +76,7 @@
 }
 
 .footer-link:hover {
-    color: var(--footer-accent);
+    color: var(--footer-accent); /* Azul no hover */
 }
 
 /* Redes Sociais */
@@ -92,7 +92,7 @@
 }
 
 .social-link:hover {
-    color: var(--footer-accent);
+    color: var(--footer-accent); /* Azul no hover */
     transform: translateY(-2px);
 }
 

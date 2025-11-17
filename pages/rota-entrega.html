@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa com Localização e Rota - Cranio Fix</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        /* ==========================================================================
+           Cranio Fix - Mapa de Localização e Rotas
+           ========================================================================== */
+
+        :root {
+            /* Cores da Marca - AZUL */
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --primary-light: #E3F2FD;
+            --black: #000000;
+            --white: #FFFFFF;
+            --dark-gray: #1A1A1A;
+            
+            /* Tons de Cinza Neutros */
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --gray-400: #BDBDBD;
+            --gray-500: #9E9E9E;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-800: #424242;
+            --gray-900: #212121;
+
+            /* Tipografia */
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1.125rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-2xl: 2rem;
+
+            /* Espaçamentos */
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+
+            /* Bordas */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-radius-xl: 20px;
+
+            /* Sombras */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-blue-glow: 0 0 15px rgba(33, 150, 243, 0.4);
+
+            /* Transições */
+            --transition-fast: 0.15s ease-out;
+            --transition-normal: 0.3s ease-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--gray-50);
+            padding: var(--space-xl);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: var(--border-radius-full);
+        }
+
+        .page-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            color: var(--dark-gray);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-md);
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: var(--space-2xl);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg), var(--shadow-blue-glow);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .control-label {
+            font-weight: 700;
+            color: var(--dark-gray);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            padding: var(--space-md);
+            font-size: var(--font-size-base);
+            border: 2px solid var(--gray-300);
+            border-radius: var(--border-radius-md);
+            background: var(--gray-100);
+            color: var(--gray-800);
+            transition: all var(--transition-fast);
+            font-family: var(--font-family);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--gray-500);
+        }
+
+        .btn {
+            padding: var(--space-md) var(--space-lg);
+            font-size: var(--font-size-base);
+            border: none;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-weight: 700;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            font-family: var(--font-family);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-800);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn i {
+            font-size: var(--font-size-lg);
+        }
+
+        #map {
+            margin-top: var(--space-xl);
+            height: 500px;
+            width: 100%;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-300);
+        }
+
+        .status-container {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--border-radius-md);
+            color: var(--dark-gray);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+        }
+
+        .status-container.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .status-container.error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .brand-logo {
+            font-size: var(--font-size-2xl);
+            color: var(--primary);
+        }
+
+        .brand-name {
+            font-size: var(--font-size-xl);
+            font-weight: 800;
+            color: var(--dark-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-md);
+            }
+
+            .container {
+                padding: var(--space-xl);
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .page-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .controls {
+                gap: var(--space-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: var(--space-sm);
+            }
+
+            .container {
+                padding: var(--space-lg);
+            }
+
+            #map {
+                height: 350px;
+            }
+
+            .btn {
+                padding: var(--space-sm) var(--space-md);
+                font-size: var(--font-size-sm);
+            }
+
+            .form-control {
+                padding: var(--space-sm);
+            }
+
+            .brand-name {
+                font-size: var(--font-size-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-header">
+            <div class="brand-logo">🧠</div>
+            <div class="brand-name">Cranio Fix</div>
+        </div>
+
+        <div class="page-header">
+            <h1 class="page-title">Mapa de Localização</h1>
+            <p class="page-subtitle">Encontre sua localização atual e calcule rotas</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="getLocation">
+                📍 Obter Localização Atual
+            </button>
+
+            <div class="control-group">
+                <label class="control-label" for="destination">Endereço de Destino</label>
+                <input type="text" class="form-control" id="destination" placeholder="Ex: Avenida Paulista, São Paulo - SP">
+            </div>
+
+            <button class="btn btn-secondary" id="navigate">
+                🧭 Calcular Rota
+            </button>
+        </div>
+
+        <div id="map"></div>
+
+        <div id="status" class="status-container">
+            Clique em "Obter Localização Atual" para começar
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Inicializa o mapa
+        const map = L.map('map').setView([-23.5505, -46.6333], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let currentMarker = null;
+        let routeLayer = null;
+        const statusElement = document.getElementById('status');
+
+        // Função para atualizar status
+        function updateStatus(message, type = 'info') {
+            statusElement.textContent = message;
+            statusElement.className = 'status-container';
+            if (type !== 'info') {
+                statusElement.classList.add(type);
+            }
+        }
+
+        // Botão localização
+        document.getElementById('getLocation').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                updateStatus('Obtendo localização...');
+                
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+
+                    map.setView([lat, lng], 15);
+
+                    if (currentMarker) map.removeLayer(currentMarker);
+                    currentMarker = L.marker([lat, lng]).addTo(map)
+                        .bindPopup("📍 Sua Localização Atual")
+                        .openPopup();
+
+                    updateStatus(`Localização encontrada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`, 'success');
+                    
+                }, (err) => {
+                    updateStatus("Erro ao obter localização: " + err.message, 'error');
+                });
+            } else {
+                updateStatus("Seu navegador não suporta geolocalização!", 'error');
+            }
+        });
+
+        // Botão rotas
+        document.getElementById('navigate').addEventListener('click', async () => {
+            const destino = document.getElementById('destination').value;
+            if (!destino) {
+                updateStatus("Digite o endereço do destino!", 'error');
+                return;
+            }
+
+            if (!currentMarker) {
+                updateStatus("Clique em 'Obter Localização Atual' primeiro!", 'error');
+                return;
+            }
+
+            updateStatus('Calculando rota...');
+
+            try {
+                const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(destino)}`;
+                const response = await fetch(geocodeUrl);
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    updateStatus("Destino não encontrado!", 'error');
+                    return;
+                }
+
+                const destLat = parseFloat(data[0].lat);
+                const destLng = parseFloat(data[0].lon);
+
+                const start = currentMarker.getLatLng();
+                const startCoord = `${start.lng},${start.lat}`;
+                const endCoord = `${destLng},${destLat}`;
+
+                const routeUrl = `https://router.project-osrm.org/route/v1/driving/${startCoord};${endCoord}?overview=full&geometries=geojson`;
+                const routeResp = await fetch(routeUrl);
+                const routeData = await routeResp.json();
+
+                if (!routeData.routes.length) {
+                    updateStatus("Não foi possível calcular a rota!", 'error');
+                    return;
+                }
+
+                if (routeLayer) map.removeLayer(routeLayer);
+
+                const route = routeData.routes[0].geometry;
+                routeLayer = L.geoJSON(route, {
+                    style: { 
+                        color: "#2196F3", 
+                        weight: 6,
+                        opacity: 0.8
+                    }
+                }).addTo(map);
+
+                L.marker([destLat, destLng])
+                    .addTo(map)
+                    .bindPopup("📍 Destino")
+                    .openPopup();
+
+                map.fitBounds(routeLayer.getBounds());
+
+                const distance = (routeData.routes[0].distance / 1000).toFixed(2);
+                const duration = Math.round(routeData.routes[0].duration / 60);
+                
+                updateStatus(`Rota calculada: ${distance} km • ${duration} minutos de viagem`, 'success');
+                
+            } catch (error) {
+                updateStatus("Erro ao calcular rota: " + error.message, 'error');
+            }
+        });
+    </script>
+</body>
+</html>

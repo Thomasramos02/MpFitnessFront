@@ -3,9 +3,9 @@
    ========================================================================== */
 
 :root {
-    --mp-yellow: #FFC107;
-    --mp-yellow-dark: #FFA000;
-    --mp-yellow-light: #FFECB3;
+    --mp-blue: #2196F3;
+    --mp-blue-dark: #1976D2;
+    --mp-blue-light: #BBDEFB;
     --mp-black: #000000;
     --mp-dark-gray: #1A1A1A;
     --mp-white: #FFFFFF;
@@ -49,7 +49,7 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-    --shadow-yellow-glow: 0 0 15px rgba(255, 193, 7, 0.4);
+    --shadow-blue-glow: 0 0 15px rgba(33, 150, 243, 0.4);
     --transition-fast: 0.15s ease-out;
     --transition-normal: 0.3s ease-out;
     --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -134,17 +134,17 @@ p { margin-bottom: var(--space-md); }
 }
 
 .btn-primary {
-    background-color: var(--mp-yellow);
-    color: var(--mp-black);
-    border-color: var(--mp-yellow);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
+    border-color: var(--mp-blue);
     box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
-    background-color: var(--mp-yellow-dark);
-    border-color: var(--mp-yellow-dark);
+    background-color: var(--mp-blue-dark);
+    border-color: var(--mp-blue-dark);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-lg), var(--shadow-yellow-glow);
+    box-shadow: var(--shadow-lg), var(--shadow-blue-glow);
 }
 
 .btn-secondary {
@@ -155,8 +155,8 @@ p { margin-bottom: var(--space-md); }
 
 .btn-secondary:hover {
     background-color: var(--gray-100);
-    border-color: var(--mp-yellow);
-    color: var(--mp-yellow);
+    border-color: var(--mp-blue);
+    color: var(--mp-blue);
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
@@ -185,7 +185,7 @@ p { margin-bottom: var(--space-md); }
 }
 
 .top-info-bar i {
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
     font-size: 0.9rem;
 }
 
@@ -224,8 +224,9 @@ p { margin-bottom: var(--space-md); }
     /* ✅ ALTERADO: A linha 'margin-right: auto;' foi removida daqui para permitir o alinhamento correto. */
 }
 .logo-icon img {
-    height: 40px;
+    height: 50px;
     vertical-align: middle;
+    border-radius: 50%;
 }
 
 .logo-text {
@@ -236,7 +237,7 @@ p { margin-bottom: var(--space-md); }
     letter-spacing: 0.5px;
 }
 .logo-text span {
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
 }
 
 .navbar-nav {
@@ -266,8 +267,8 @@ p { margin-bottom: var(--space-md); }
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus,
 .navbar-nav .nav-link.active {
-    background-color: rgba(255, 193, 7, 0.15);
-    color: var(--mp-yellow);
+    background-color: rgba(33, 150, 243, 0.15);
+    color: var(--mp-blue);
 }
 
 .navbar-nav .nav-link i {
@@ -283,8 +284,8 @@ p { margin-bottom: var(--space-md); }
     position: absolute;
     top: -6px;
     right: -6px;
-    background-color: var(--mp-yellow);
-    color: var(--mp-black);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
     min-width: 18px;
     height: 18px;
     border-radius: var(--border-radius-full);
@@ -309,8 +310,8 @@ p { margin-bottom: var(--space-md); }
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--mp-yellow);
-    color: var(--mp-black);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -361,8 +362,8 @@ p { margin-bottom: var(--space-md); }
     border-bottom: none;
 }
 .dropdown-link:hover {
-    background-color: var(--mp-yellow-light);
-    color: var(--mp-yellow-dark);
+    background-color: var(--mp-blue-light);
+    color: var(--mp-blue-dark);
 }
 
 .navbar-toggler {
@@ -378,7 +379,7 @@ p { margin-bottom: var(--space-md); }
     background-color: rgba(255, 255, 255, 0.15);
 }
 .navbar-toggler:focus {
-    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.5);
 }
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
@@ -443,14 +444,14 @@ p { margin-bottom: var(--space-md); }
     }
 
     .navbar-nav .nav-link i {
-        color: var(--mp-yellow);
+        color: var(--mp-blue);
     }
 
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link:focus,
     .navbar-nav .nav-link.active {
-        background-color: rgba(255, 193, 7, 0.1);
-        color: var(--mp-yellow);
+        background-color: rgba(33, 150, 243, 0.1);
+        color: var(--mp-blue);
     }
     
     .user-menu {
@@ -484,7 +485,7 @@ p { margin-bottom: var(--space-md); }
     }
     .user-menu .dropdown-link:hover {
         background-color: rgba(255, 255, 255, 0.1);
-        color: var(--mp-yellow);
+        color: var(--mp-blue);
     }
 }
 

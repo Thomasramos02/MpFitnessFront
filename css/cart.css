@@ -1,11 +1,11 @@
 /* MP Fitness - Estilos Modernos da Página do Carrinho */
 
-/* Variáveis atualizadas conforme padrão solicitado */
+/* Variáveis atualizadas para AZUL conforme padrão solicitado */
 :root {
-    /* Cores da Marca */
-    --mp-yellow: #FFC107;
-    --mp-yellow-dark: #FFA000;
-    --mp-yellow-light: #FFECB3;
+    /* Cores da Marca - AZUL */
+    --mp-blue: #2196F3;
+    --mp-blue-dark: #1976D2;
+    --mp-blue-light: #E3F2FD;
     --mp-white: #FFFFFF;
     --mp-black: #000000;
     --mp-dark-gray: #1A1A1A;
@@ -76,7 +76,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background-color: var(--mp-yellow);
+    background-color: var(--mp-blue);
     border-radius: var(--border-radius-full);
 }
 
@@ -126,10 +126,10 @@
 }
 
 .step.active .step-number {
-    background-color: var(--mp-yellow);
-    color: var(--mp-dark-gray);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
     transform: scale(1.1);
-    box-shadow: 0 0 0 3px var(--mp-yellow-light);
+    box-shadow: 0 0 0 3px var(--mp-blue-light);
 }
 
 .step-text {
@@ -222,7 +222,7 @@
 }
 
 .cart-item:hover {
-    background-color: var(--mp-yellow-light);
+    background-color: var(--mp-blue-light);
 }
 
 .item-image {
@@ -273,7 +273,7 @@
 
 .item-price {
     font-weight: 700;
-    color: var(--mp-yellow-dark);
+    color: var(--mp-blue-dark);
     font-size: var(--font-size-md);
 }
 
@@ -308,9 +308,9 @@
 }
 
 .quantity-btn:hover {
-    background-color: var(--mp-yellow-light);
-    border-color: var(--mp-yellow);
-    color: var(--mp-yellow-dark);
+    background-color: var(--mp-blue-light);
+    border-color: var(--mp-blue);
+    color: var(--mp-blue-dark);
 }
 
 .quantity {
@@ -423,14 +423,14 @@
 }
 
 .delivery-option input:checked + label {
-    border-color: var(--mp-yellow);
-    background-color: var(--mp-yellow-light);
-    box-shadow: 0 0 0 2px var(--mp-yellow-light);
+    border-color: var(--mp-blue);
+    background-color: var(--mp-blue-light);
+    box-shadow: 0 0 0 2px var(--mp-blue-light);
 }
 
 .delivery-option i {
     font-size: var(--font-size-lg);
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
 }
 
 .delivery-option small {
@@ -470,14 +470,14 @@
 }
 
 .address-option input:checked + label {
-    border-color: var(--mp-yellow);
-    background-color: var(--mp-yellow-light);
-    box-shadow: 0 0 0 2px var(--mp-yellow-light);
+    border-color: var(--mp-blue);
+    background-color: var(--mp-blue-light);
+    box-shadow: 0 0 0 2px var(--mp-blue-light);
 }
 
 .address-option i {
     font-size: var(--font-size-lg);
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
 }
 
 .saved-address {
@@ -538,8 +538,8 @@
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: var(--mp-yellow);
-    box-shadow: 0 0 0 2px var(--mp-yellow-light);
+    border-color: var(--mp-blue);
+    box-shadow: 0 0 0 2px var(--mp-blue-light);
     outline: none;
     background-color: var(--mp-white);
 }
@@ -550,8 +550,8 @@
     margin-top: var(--space-lg);
     padding: var(--space-md);
     font-size: var(--font-size-base);
-    background-color: var(--mp-yellow);
-    color: var(--mp-dark-gray);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
     border: none;
     border-radius: var(--border-radius-md);
     font-weight: 700;
@@ -565,7 +565,7 @@
 }
 
 .btn-checkout:hover {
-    background-color: var(--mp-yellow-dark);
+    background-color: var(--mp-blue-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }

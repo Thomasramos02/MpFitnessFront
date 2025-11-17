@@ -6,8 +6,8 @@
             /* Cores da Marca */
             --primary: #000000; /* Preto principal */
             --primary-light: #1A1A1A; /* Cinza escuro para detalhes */
-            --secondary: #FFC107; /* Amarelo MP Fitness */
-            --secondary-light: #FFA000; /* Amarelo mais escuro */
+            --secondary: #2196F3; /* Azul MP Fitness */
+            --secondary-light: #1976D2; /* Azul mais escuro */
             --light: #FFFFFF; /* Branco */
             --dark: #121212; /* Cinza muito escuro */
 
@@ -154,7 +154,7 @@
         }
 
         .back-button:hover {
-            color: var(--secondary); /* Amarelo no hover */
+            color: var(--secondary); /* Azul no hover */
             transform: translateX(-3px); /* Leve movimento para a esquerda */
         }
 
@@ -186,7 +186,7 @@
             transform: translateX(-50%);
             width: 60px; /* Largura do underline */
             height: 4px;
-            background-color: var(--secondary); /* Amarelo MP Fitness */
+            background-color: var(--secondary); /* Azul MP Fitness */
             border-radius: var(--border-radius-full);
         }
 
@@ -217,7 +217,7 @@
         .loading-message i, .error-message i {
             font-size: var(--font-size-2xl);
             margin-bottom: var(--space-md);
-            color: var(--secondary); /* Ícone de loading amarelo */        }
+            color: var(--secondary); /* Ícone de loading azul */        }
 
         .error-message {
             background-color: var(--danger-light);
@@ -334,7 +334,7 @@
 
         .btn-primary {
             background-color: var(--secondary);
-            color: var(--primary);
+            color: var(--light);
         }
 
         .btn-primary:hover {
@@ -436,8 +436,8 @@
             z-index: 1; /* Acima da linha */
         }
         .timeline-dot.active {
-            background-color: var(--secondary); /* Amarelo para ativo */
-            color: var(--primary);
+            background-color: var(--secondary); /* Azul para ativo */
+            color: var(--light);
             box-shadow: var(--shadow-md);
             transform: scale(1.1); /* Levemente maior quando ativo */        }
         /* Cor específica para status Cancelado na timeline */

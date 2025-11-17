@@ -250,9 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
             quantCell.textContent = product.quantidade;
 
 
-            const sizeCell = document.createElement('td');
-            sizeCell.textContent = product.tamanho || '-';
-
 
             const typeCell = document.createElement('td');
             typeCell.textContent = product.tipoProduto === 'COMBO' ? 'Combo' : 'Único';
@@ -283,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </button>
                 `;
 
-            row.append(imgCell, nameCell, categoryCell, descCell, priceCell, quantCell, sizeCell, typeCell, offerCell, statusCell, actionsCell);
+            row.append(imgCell, nameCell, categoryCell, descCell, priceCell, quantCell, typeCell, offerCell, statusCell, actionsCell);
             productsTableBody.appendChild(row);
         });
 
@@ -334,7 +331,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('productCategory').value = product.categoria || '';
         document.getElementById('productPrice').value = product.valor;
         document.getElementById('productQuantity').value = product.quantidade;
-        document.getElementById('productSize').value = product.tamanho || '';
         document.getElementById('productType').value = product.tipoProduto || 'UNICO';
         document.getElementById('productStatus').value = product.status || 'ATIVO';
         document.getElementById('onOffer').checked = product.emOferta || false;
@@ -595,7 +591,6 @@ document.addEventListener('DOMContentLoaded', function () {
             categoria: document.getElementById('productCategory')?.value || '', // Adicionado
             valor: parseFloat(document.getElementById('productPrice')?.value) || 0,
             quantidade: parseInt(document.getElementById('productQuantity')?.value) || 0,
-            tamanho: document.getElementById('productSize')?.value || null,
             tipoProduto: document.getElementById('productType')?.value || 'UNICO',
             status: document.getElementById('productStatus')?.value || 'ATIVO',
             emOferta: document.getElementById('onOffer')?.checked || false,
@@ -825,41 +820,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return imageUrl;
     }
 
-    // ✅ Função para formatar tamanho de forma mais legível
-    function formatSize(tamanho) {
-        if (!tamanho || tamanho.trim() === '') {
-            return '-';
-        }
-
-        // Se for número simples (tamanho de calçado), adicionar "Nº"
-        if (!isNaN(tamanho) && tamanho.length <= 2 && tamanho.length > 0) {
-            return `Nº ${tamanho}`;
-        }
-
-        // Se contém "g" ou "kg", formatar como peso
-        if (tamanho.toLowerCase().includes('g') || tamanho.toLowerCase().includes('kg')) {
-            return tamanho.toUpperCase();
-        }
-
-        // Se contém "cápsulas" ou "caps", formatar
-        if (tamanho.toLowerCase().includes('cápsula') || tamanho.toLowerCase().includes('caps')) {
-            return tamanho;
-        }
-
-
-        return tamanho;
-    }
-
     // ✅ Função para obter cor da categoria
     function getCategoryColor(categoria) {
         const colors = {
-            'Equipamentos': '#007bff',
-            'Suplementos': '#28a745',
-            'Acessórios': '#ffc107',
-            'Roupas': '#dc3545',
-            'Calçados': '#6f42c1',
-            'Bebidas': '#17a2b8',
-            'Snacks': '#fd7e14',
+            'Biomateriais': '#007bff',
+            'OPRE': '#28a745',
+            'Outros': '#ffc107',
             'Geral': '#6c757d'
         };
         return colors[categoria] || '#6c757d';

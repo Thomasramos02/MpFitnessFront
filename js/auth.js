@@ -10,6 +10,45 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
+// Função para formatar CPF
+function formatCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    return cpf;
+}
+
+// Função para validar CPF
+function validateCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    
+    if (cpf.length !== 11) return false;
+    
+    // Elimina CPFs invalidos conhecidos
+    if (/^(\d)\1+$/.test(cpf)) return false;
+    
+    // Valida 1o digito
+    let add = 0;
+    for (let i = 0; i < 9; i++) {
+        add += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(9))) return false;
+    
+    // Valida 2o digito
+    add = 0;
+    for (let i = 0; i < 10; i++) {
+        add += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(10))) return false;
+    
+    return true;
+}
+
 // Função universal de redirecionamento
 function redirectToIndex() {
     // Verifica se já está na página index
@@ -34,6 +73,13 @@ function redirectToIndex() {
 // Mostrar formulário de login por padrão
 document.addEventListener('DOMContentLoaded', function () {
     showLoginForm();
+
+    const cpfInput = document.getElementById('register-cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function(e) {
+            e.target.value = formatCPF(e.target.value);
+        });
+    }
 
     // Verifica token na URL (Google Login)
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,6 +124,9 @@ function showRegisterForm() {
     document.getElementById('step-1').classList.remove('completed');
     document.getElementById('step-2').classList.remove('active');
     document.getElementById('progress-fill').style.width = '0%';
+
+    // Limpar campo CPF
+    document.getElementById('register-cpf').value = '';
 
     document.getElementById('register-name').focus();
 }
@@ -183,6 +232,22 @@ function validateStep1() {
         setTimeout(() => name.classList.remove('shake'), 400);
     } else {
         name.classList.remove('error');
+    }
+    // VALIDAÇÃO DO CPF (ADICIONADA)
+    const cpf = document.getElementById('register-cpf');
+    const cpfDigits = cpf.value.replace(/\D/g, '');
+    if (!cpfDigits || cpfDigits.length !== 11) {
+        cpf.classList.add('error', 'shake');
+        showToast('Digite um CPF válido', 'error');
+        isValid = false;
+        setTimeout(() => cpf.classList.remove('shake'), 400);
+    } else if (!validateCPF(cpf.value)) {
+        cpf.classList.add('error', 'shake');
+        showToast('Digite um CPF válido', 'error');
+        isValid = false;
+        setTimeout(() => cpf.classList.remove('shake'), 400);
+    } else {
+        cpf.classList.remove('error');
     }
 
     // Validar email
@@ -338,12 +403,14 @@ function validateEmail(email) {
 }
 
 // Enviar formulário de cadastro
+// Enviar formulário de cadastro - VERSÃO CORRIGIDA
 async function submitForm() {
     showLoading('register-btn');
 
     // Preparar dados do usuário
     const userData = {
         nome: document.getElementById('register-name').value,
+        cpf: document.getElementById('register-cpf').value.replace(/\D/g, ''), // CPF APENAS NÚMEROS
         email: document.getElementById('register-email').value,
         telefone: document.getElementById('register-phone').value.replace(/\D/g, ''),
         senha: document.getElementById('register-password').value
@@ -373,11 +440,18 @@ async function submitForm() {
             body: JSON.stringify(userData)
         });
 
+        // VERIFICAÇÃO DE ERRO CORRIGIDA
         if (!response.ok) {
             const errorData = await response.json();
 
             if (response.status === 409) {
-                showToast('E-mail já cadastrado', 'error');
+                // Verifica se é conflito de CPF ou email
+                const errorMsg = errorData.error || '';
+                if (errorMsg.includes('CPF') || errorMsg.includes('cpf')) {
+                    showToast('CPF já cadastrado', 'error');
+                } else {
+                    showToast('E-mail já cadastrado', 'error');
+                }
             } else if (response.status === 400) {
                 showToast('Dados inválidos: ' + (errorData.message || ''), 'error');
             } else {
@@ -386,6 +460,7 @@ async function submitForm() {
             return;
         }
 
+        // SÓ CHEGA AQUI SE O CADASTRO FOI BEM-SUCEDIDO
         showToast('Cadastro realizado! Redirecionando para login...');
         setTimeout(showLoginForm, 2000);
 

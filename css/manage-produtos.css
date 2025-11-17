@@ -3,13 +3,13 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Variáveis CSS (Design Tokens) - Baseado no estilo original
+   1. Variáveis CSS (Design Tokens) - Atualizado para AZUL
    -------------------------------------------------------------------------- */
 :root {
-    /* Cores da Marca */
-    --mp-yellow: #FFC107;         /* Amarelo vibrante - Primária */
-    --mp-yellow-dark: #FFA000;    /* Amarelo mais escuro - Hover/Active */
-    --mp-yellow-light: #FFF8E1;   /* Amarelo muito claro - Backgrounds sutis */
+    /* Cores da Marca - AZUL */
+    --mp-blue: #2196F3;           /* Azul vibrante - Primária */
+    --mp-blue-dark: #1976D2;      /* Azul mais escuro - Hover/Active */
+    --mp-blue-light: #E3F2FD;     /* Azul muito claro - Backgrounds sutis */
     --mp-black: #000000;          /* Preto puro - Fundo principal, texto */
     --mp-dark-gray: #1A1A1A;      /* Cinza escuro - Elementos, cards */
     --mp-white: #FFFFFF;          /* Branco - Texto, backgrounds */
@@ -64,7 +64,7 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-    --shadow-yellow-glow: 0 0 15px rgba(255, 193, 7, 0.4);
+    --shadow-blue-glow: 0 0 15px rgba(33, 150, 243, 0.4);
 
     /* Transições */
     --transition-fast: 0.15s ease-out;
@@ -155,7 +155,7 @@ p { margin-bottom: var(--space-md); }
     left: 0;
     width: 50px;
     height: 4px;
-    background-color: var(--mp-yellow);
+    background-color: var(--mp-blue);
     border-radius: var(--border-radius-full);
 }
 
@@ -167,8 +167,8 @@ p { margin-bottom: var(--space-md); }
 }
 
 .add-product-btn {
-    background-color: var(--mp-yellow);
-    color: var(--mp-black);
+    background-color: var(--mp-blue);
+    color: var(--mp-white);
     border: none;
     padding: var(--space-sm) var(--space-lg);
     border-radius: var(--border-radius-md);
@@ -185,7 +185,7 @@ p { margin-bottom: var(--space-md); }
 }
 
 .add-product-btn:hover {
-    background-color: var(--mp-yellow-dark);
+    background-color: var(--mp-blue-dark);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
@@ -425,8 +425,8 @@ p { margin-bottom: var(--space-md); }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--mp-yellow);
-    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+    border-color: var(--mp-blue);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
 }
 
 textarea.form-control {
@@ -457,7 +457,7 @@ textarea.form-control {
 }
 
 .image-upload:hover {
-    border-color: var(--mp-yellow);
+    border-color: var(--mp-blue);
 }
 
 .image-upload-icon {
@@ -643,7 +643,7 @@ textarea.form-control {
 
 .footer-logo-icon {
     font-size: var(--font-size-lg);
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
 }
 
 .footer-links {
@@ -660,7 +660,7 @@ textarea.form-control {
 }
 
 .footer-link:hover {
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
 }
 
 .footer-social {
@@ -675,7 +675,7 @@ textarea.form-control {
 }
 
 .social-link:hover {
-    color: var(--mp-yellow);
+    color: var(--mp-blue);
     transform: translateY(-2px);
 }
 
@@ -911,8 +911,8 @@ textarea.form-control {
     --header-height: 70px;
     --header-bg: #000000;
     --header-text: #FFFFFF;
-    --header-accent: #FFC107;
-    --header-hover-bg: rgba(255, 193, 7, 0.15);
+    --header-accent: #2196F3; /* AZUL */
+    --header-hover-bg: rgba(33, 150, 243, 0.15);
     --mobile-breakpoint: 991.98px;
 }
 
@@ -1030,7 +1030,7 @@ textarea.form-control {
     top: -6px;
     right: -6px;
     background-color: var(--header-accent);
-    color: #000;
+    color: var(--mp-white);
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -1052,7 +1052,7 @@ textarea.form-control {
     height: 40px;
     border-radius: 50%;
     background-color: var(--header-accent);
-    color: #000;
+    color: var(--mp-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1101,8 +1101,8 @@ textarea.form-control {
 }
 
 .mp-header .dropdown-link:hover {
-    background-color: #FFF8E1;
-    color: #FFA000;
+    background-color: var(--mp-blue-light);
+    color: var(--mp-blue-dark);
 }
 
 /* 7. Menu mobile */
@@ -1167,7 +1167,7 @@ textarea.form-control {
         
     }
      .mp-header .nav-link i {
-        color: var(--mp-yellow);
+        color: var(--mp-blue);
     }
 
     

@@ -47,9 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const adminProductsLink = document.querySelector('a[href="./pages/manage-products.html"]');
         const adminOrdersLink = document.querySelector('a[href="./pages/manage_pedidos.html"]');
         const acompanharPedidoLink = document.querySelector('a[href="./pages/acompanharPedido.html"]');
+        const adminDeliveryRouteLink = document.querySelector('a[href="./pages/rota-entrega.html"]');
 
         if (adminProductsLink) adminProductsLink.classList.add('hidden');
         if (adminOrdersLink) adminOrdersLink.classList.add('hidden');
+        if (adminDeliveryRouteLink) adminDeliveryRouteLink.classList.add('hidden');
 
         if (acompanharPedidoLink) {
             if (jwtToken) {
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (checkAdminRole()) {
                 if (adminProductsLink) adminProductsLink.classList.remove('hidden');
                 if (adminOrdersLink) adminOrdersLink.classList.remove('hidden');
+                if (adminDeliveryRouteLink) adminDeliveryRouteLink.classList.remove('hidden'); // NOVO
             }
         } else {
             authLinksContainer.classList.remove('hidden');

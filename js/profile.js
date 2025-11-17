@@ -13,6 +13,14 @@ function formatCEP(cep) {
     return match ? `${match[1]}-${match[2]}` : cep;
 }
 
+// ✅ FUNÇÃO PARA FORMATAR CPF (ADICIONAR)
+function formatCPF(cpf) {
+    if (!cpf) return '';
+    const cleaned = ('' + cpf).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{3})(\d{2})$/);
+    return match ? `${match[1]}.${match[2]}.${match[3]}-${match[4]}` : cpf;
+}
+
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
@@ -187,6 +195,8 @@ async function loadUserData() {
         document.getElementById('profile-name').value = userData.nome || '';
         document.getElementById('profile-email').value = userData.email || '';
         document.getElementById('profile-phone').value = formatPhone(userData.telefone) || '';
+        // ✅ CARREGAR CPF (ADICIONADO)
+        document.getElementById('profile-cpf').value = formatCPF(userData.cpf) || 'Não informado';
 
         if (userData.endereco) {
             document.getElementById('profile-cep').value = formatCEP(userData.endereco.cep) || '';

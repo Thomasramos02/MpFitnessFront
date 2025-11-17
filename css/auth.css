@@ -1,7 +1,7 @@
 :root {
-    --primary: #FFC107;
-    /* Amarelo vibrante */
-    --primary-dark: #FFA000;
+    --primary: #2196F3;
+    /* Azul vibrante */
+    --primary-dark: #1976D2;
     --secondary: #FFFFFF;
     --dark: #000000;
     --gray: #757575;
@@ -96,7 +96,7 @@ body {
 
 .step.active {
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--secondary);
 }
 
 .step.completed {
@@ -181,7 +181,7 @@ body {
 .form-control:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
     background-color: var(--secondary);
 }
 
@@ -200,7 +200,7 @@ body {
     width: 100%;
     padding: 15px;
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--secondary);
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -216,7 +216,7 @@ body {
 .btn:hover {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
 }
 
 .btn:active {
@@ -327,7 +327,7 @@ body {
     right: 10px;
     top: 38px;
     background: var(--primary);
-    color: var(--dark);
+    color: var(--secondary);
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
